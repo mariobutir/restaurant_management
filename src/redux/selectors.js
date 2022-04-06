@@ -1,7 +1,6 @@
-import {store} from "../index";
+import { store } from "../index"
 
-
-const storeSelector = callback => {
+const storeSelector = (callback) => {
   return callback(store.getState())
 }
 

@@ -1,5 +1,5 @@
-import { all, takeEvery, put } from 'redux-saga/effects'
-import actions from "../actions";
+import { all, takeEvery, put } from "redux-saga/effects"
+import actions from "../actions"
 
 const { SET_OVERVIEW_STATE: SET_STATE } = actions
 
@@ -8,7 +8,5 @@ export function* SET_OVERVIEW_STATE() {
 }
 
 export default function* rootSaga() {
-  yield all([
-    takeEvery(actions.SET_OVERVIEW_STATE, SET_OVERVIEW_STATE),
-  ])
+  yield all([takeEvery(actions.SET_OVERVIEW_STATE, SET_OVERVIEW_STATE)])
 }

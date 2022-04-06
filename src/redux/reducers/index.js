@@ -1,9 +1,9 @@
-import { combineReducers } from 'redux'
-import overview from './overview'
+import { combineReducers } from "redux"
+import overview from "./overview"
 
 const reducers = () =>
   combineReducers({
-    overview
+    overview,
   })
 
 export default reducers

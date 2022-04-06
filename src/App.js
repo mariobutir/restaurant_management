@@ -1,7 +1,9 @@
+import { useDispatch } from "react-redux"
+
 const App = () => {
-  return (
-      <div>Hello!</div>
-  )
+  const dispatch = useDispatch()
+
+  return <div>Hello!</div>
 }
 
-export default App;
+export default App
