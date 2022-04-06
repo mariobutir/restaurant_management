@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import actions from "./redux/actions"
+import { Button, DatePicker } from "antd"
 
 const App = () => {
   const dispatch = useDispatch()
@@ -10,10 +11,17 @@ const App = () => {
     dispatch({ type: actions.FETCH_OVERVIEW })
   }
 
+  const onChange = (date, dateString) => {
+    console.log(date, dateString)
+  }
+
   return (
     <>
       <p>{test}</p>
-      <button onClick={changeState}>Hello!</button>
+      <Button type="primary" onClick={changeState}>
+        Hello!
+      </Button>
+      <DatePicker onChange={onChange} picker="month" />
     </>
   )
 }
