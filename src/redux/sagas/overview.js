@@ -3,10 +3,10 @@ import actions from "../actions"
 
 const { SET_OVERVIEW_STATE: SET_STATE } = actions
 
-export function* SET_OVERVIEW_STATE() {
-  yield put({ type: SET_STATE, payload: { test: true } })
+export function* FETCH_OVERVIEW() {
+  yield put({ type: SET_STATE, payload: { test: 1 } })
 }
 
 export default function* rootSaga() {
-  yield all([takeEvery(actions.SET_OVERVIEW_STATE, SET_OVERVIEW_STATE)])
+  yield all([takeEvery(actions.FETCH_OVERVIEW, FETCH_OVERVIEW)])
 }
