@@ -1,29 +1,25 @@
-import { useDispatch, useSelector } from "react-redux"
-import actions from "./redux/actions"
-import { Button, DatePicker } from "antd"
+import React from "react"
+import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom"
+import Overview from "./views/Overview"
 
-const App = () => {
-  const dispatch = useDispatch()
-  const test = useSelector((store) => store.overview.test)
+const routes = [
+  {
+    path: "/overview",
+    element: <Overview />,
+  },
+]
 
-  const changeState = () => {
-    console.log("clicked!")
-    dispatch({ type: actions.FETCH_OVERVIEW })
-  }
-
-  const onChange = (date, dateString) => {
-    console.log(date, dateString)
-  }
-
+const Router = () => {
   return (
-    <>
-      <p>{test}</p>
-      <Button type="primary" onClick={changeState}>
-        Hello!
-      </Button>
-      <DatePicker onChange={onChange} picker="month" />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Navigate replace to="/overview" />} />
+        {routes.map(({ path, element }) => (
+          <Route path={path} element={element} key={path} />
+        ))}
+      </Routes>
+    </BrowserRouter>
   )
 }
 
-export default App
+export default Router

@@ -1,0 +1,48 @@
+$header-height: 64px;
+$sider-width: 80px;
+
+$bottom-drawer-height: 88px;
+
+// Dark shades
+$theme-color: #001529;
+$secondary-theme-color: #2a3b52;
+$tertiary-theme-color: #55657e;
+
+// Light shades
+$light-theme-color: #8293ad;
+$secondary-light-theme-color: #b2c3df;
+$tertiary-light-theme-color: #e4f6ff;
+
+$primary-color: #1e559a; // primary color for all components
+$secondary-color: #5981cb;
+
+$background-color: #f0f2f5;
+
+$error-color: #ca2e55;
+
+$divider-color: $secondary-theme-color;
+
+$component-color: #ffffff;
+$component-color-contrast: #f8f8f8;
+$component-color-accent: #eeeeee;
+
+@mixin animated-style {
+  transition: color 0.3s, background-color 0.3s, border-color 0.3s, box-shadow 0.3s, opacity 0.3s;
+}
+
+@mixin shadow-element {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+@mixin shadow-top {
+  box-shadow: 0 -6px 16px -8px rgba(0, 0, 0, 0.08), 0 -9px 28px 0 rgba(0, 0, 0, 0.05),
+    0 -12px 48px 16px rgba(0, 0, 0, 0.03);
+}
+
+@mixin shadow-bottom {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+@mixin shadow-right {
+  box-shadow: 15px 0 30px rgba(0, 0, 0, 0.3);
+}

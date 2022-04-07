@@ -1,0 +1,50 @@
+@use "../../../constants";
+
+.date-select {
+  margin-left: 12px;
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+
+  .ant-picker-input {
+    cursor: pointer;
+    border-radius: 2px;
+    input {
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      width: 80px;
+      color: white !important;
+      user-select: none;
+      pointer-events: none;
+      caret-color: transparent;
+    }
+
+    &:hover {
+      background-color: constants.$secondary-theme-color;
+    }
+  }
+
+  .ant-radio-group {
+    label {
+      &::before {
+        content: none;
+      }
+
+      background-color: constants.$theme-color;
+      color: white;
+      border: none;
+      border-radius: 2px;
+      margin-left: 2px;
+      margin-right: 2px;
+
+      &:hover {
+        background-color: constants.$secondary-theme-color;
+      }
+    }
+  }
+
+  & > * {
+    margin-left: 15px !important;
+  }
+}
