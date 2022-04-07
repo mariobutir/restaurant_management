@@ -1,0 +1,109 @@
+@use '../constants' as vars;
+
+.main__layout {
+  .main__content {
+    position: relative;
+    margin-top: vars.$header-height;
+    margin-left: vars.$sider-width;
+    min-height: calc(100vh - #{vars.$header-height}); // Header + Footer
+  }
+  .main__header {
+    padding: 0 20px;
+    top: 0;
+    left: vars.$sider-width;
+    position: fixed;
+    z-index: 1;
+    width: calc(100vw - #{vars.$sider-width});
+    display: flex;
+    align-items: center;
+  }
+  .main__sidebar {
+    position: fixed;
+    z-index: 10;
+    height: 100%;
+    background-color: white;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.15);
+    .ant-menu {
+      background-color: inherit;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: vars.$header-height;
+      background-color: vars.$secondary-theme-color;
+    }
+
+    .ant-menu.ant-menu-inline-collapsed > .ant-menu-item {
+      margin-top: 0;
+      margin-bottom: 0;
+      width: vars.$sider-width;
+    }
+
+    .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+      background-color: rgb(231, 231, 231);
+
+      @keyframes fill-bar {
+        0% {
+          transform: scaleY(0);
+          opacity: 0.3;
+        }
+        100% {
+          transform: scaleY(1);
+          opacity: 1;
+        }
+      }
+
+      &::before {
+        content: '';
+        top: 0;
+        right: 0;
+        position: absolute;
+        display: block;
+        width: 4px;
+        height: 100%;
+        opacity: 1;
+
+        background-color: vars.$tertiary-theme-color;
+        animation: 0.25s cubic-bezier(0.11, 0.58, 0.61, 1) 0s 1 fill-bar;
+      }
+    }
+  }
+  .secondary__sidebar {
+    top: vars.$header-height;
+    left: vars.$sider-width;
+    position: fixed;
+    z-index: 10;
+    height: calc(100vh - #{vars.$header-height});
+    background-color: white;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
+    .ant-menu {
+      background-color: inherit;
+    }
+    .ant-menu-item {
+      height: 30px;
+      display: flex;
+      align-items: center;
+    }
+    .ant-menu-title-content {
+      width: 100%;
+    }
+    .submenu-title {
+      font-size: 15px;
+      font-weight: bold;
+      margin: 10px;
+    }
+    .submenu-item-title {
+      display: flex;
+      justify-content: space-between;
+    }
+    .ant-menu-vertical .ant-menu-item:not(:last-child),
+    .ant-menu-vertical-left .ant-menu-item:not(:last-child),
+    .ant-menu-vertical-right .ant-menu-item:not(:last-child),
+    .ant-menu-inline .ant-menu-item:not(:last-child) {
+      margin: 4px 0;
+    }
+  }
+}

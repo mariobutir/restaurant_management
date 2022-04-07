@@ -3,6 +3,7 @@ import enums from "../../enums"
 
 const initialState = {
   test: 0,
+  loading: false,
   filters: {
     date: new Date(),
     type: enums.IntervalType.Day,
