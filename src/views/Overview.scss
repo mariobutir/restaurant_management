@@ -1,0 +1,73 @@
+@use '../constants' as vars;
+
+.overview {
+  transition: width 0.2s cubic-bezier(0.11, 0.58, 0.61, 1);
+  transition: transform 0.2s cubic-bezier(0.11, 0.58, 0.61, 1);
+
+  .expand-button {
+    display: none;
+    padding: 0;
+    height: 26px;
+  }
+
+  .collapsed {
+    .main-container {
+      width: calc(100vh - #{vars.$sider-width});
+    }
+  }
+
+  .overview-content {
+    display: flex;
+  }
+
+  .main-container {
+    flex: 1;
+    height: calc(100vh - #{vars.$header-height});
+    width: calc(100vh - #{vars.$sider-width});
+    overflow-y: auto;
+  }
+
+  .overview-row {
+    padding: 0 5px;
+    background-color: vars.$component-color-accent;
+    &:nth-child(2n) {
+      background-color: vars.$component-color-contrast;
+    }
+
+    .cell-date {
+      color: gray;
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 26px;
+
+      .date {
+        padding: 3px 5px;
+      }
+    }
+
+    .today {
+      color: #1e559a;
+      background-color: #d0e1f5;
+      border-radius: 10px;
+    }
+
+    .ant-col {
+      padding: 20px 10px;
+      border-right: 1px solid lightgray;
+      &:last-child {
+        border-right: none;
+      }
+    }
+
+    .ant-card {
+      border-radius: 5px;
+    }
+  }
+  .ant-col {
+    flex: 1;
+    align-items: center;
+    display: flex;
+  }
+}

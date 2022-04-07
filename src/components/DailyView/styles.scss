@@ -1,0 +1,20 @@
+.daily-view {
+  .days-row {
+    background-color: white;
+    border-bottom: 1px solid lightgray;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    height: 40px;
+    .ant-col {
+      display: flex;
+      justify-content: center;
+      text-transform: uppercase;
+      color: gray;
+      font-weight: bold;
+    }
+  }
+  .overview-row {
+    min-height: 140px;
+  }
+}
