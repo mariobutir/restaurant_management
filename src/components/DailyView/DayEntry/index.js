@@ -20,11 +20,11 @@ const DayEntry = (props) => {
   const cardDetails = () => {
     if (date.isBefore(today, "day")) {
       actions = [
-        <FileTextOutlined key="details" />,
-        <EditOutlined key="edit" />,
+        <FileTextOutlined key="details" onClick={handleCardClick} />,
+        <EditOutlined key="edit" onClick={handleCardClick} />,
       ]
       return (
-        <Card className="date-card" onClick={handleCardClick} actions={actions}>
+        <Card className="date-card" actions={actions}>
           <div className="report-details">
             Expenses: 100
             <br />
@@ -34,14 +34,8 @@ const DayEntry = (props) => {
         </Card>
       )
     } else {
-      actions = [<PlusOutlined key="add-report" />]
-      return (
-        <Card
-          className="date-card"
-          onClick={handleCardClick}
-          actions={actions}
-        />
-      )
+      actions = [<PlusOutlined key="add-report" onClick={handleCardClick} />]
+      return <Card className="date-card" actions={actions} />
     }
   }
   return (
@@ -52,7 +46,7 @@ const DayEntry = (props) => {
         </span>
       </div>
       <div className={`date-card-wrapper ${selected ? "selected" : ""}`}>
-        <Card className="date-card" onClick={handleCardClick} actions={actions}>
+        <Card className="date-card" actions={actions}>
           {cardDetails()}
         </Card>
       </div>
