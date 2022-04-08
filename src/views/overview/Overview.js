@@ -1,8 +1,8 @@
-import FilterBar from "../components/FilterBar"
+import FilterBar from "../../components/FilterBar"
 import { useSelector } from "react-redux"
-import ViewContent from "../layouts/ViewContent"
-import enums from "../enums"
-import DailyView from "../components/DailyView"
+import ViewContent from "../../layouts/ViewContent"
+import enums from "../../enums"
+import DailyView from "../../components/DailyView"
 
 import "./Overview.scss"
 
@@ -15,7 +15,7 @@ const GranulatedView = (props) => {
 const Overview = () => {
   const {
     loading,
-    filters: { type },
+    filters: { type }
   } = useSelector((store) => store.overview)
 
   return (

@@ -1,6 +1,6 @@
 import React from "react"
 import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom"
-import Overview from "./views/Overview"
+import Overview from "./views/overview/Overview"
 
 const routes = [
   {
