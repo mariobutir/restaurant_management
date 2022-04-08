@@ -85,7 +85,6 @@ const DateSelect = () => {
         onChange={handleTypeChange}
       >
         <Radio.Button value={enums.IntervalType.Day}>Daily</Radio.Button>
-        <Radio.Button value={enums.IntervalType.Month}>Monthly</Radio.Button>
       </Radio.Group>
     </div>
   )

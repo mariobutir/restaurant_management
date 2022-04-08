@@ -10,8 +10,11 @@
       display: flex;
       justify-content: center;
       text-transform: uppercase;
-      color: gray;
       font-weight: bold;
+    }
+
+    .Sat, .Sun {
+      color: red;
     }
   }
   .overview-row {

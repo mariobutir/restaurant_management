@@ -1,19 +1,20 @@
 const CalendarRow = (length = 7) => {
-  const row = Array.from({ length }, () => new Object())
+  const row = Array.from({ length }, () => {
+    return {}
+  })
   row.hash = () => {
-    return row.reduce((acc, curr) => curr.day + acc, 0)
+    return row.reduce((acc, curr) => curr + acc, 0)
   }
   return row
 }
 
-const calculateDailyData = calculations => {
+const calculateDailyData = (calculations) => {
   const calendar = []
 
   let row = CalendarRow()
   let dayOfWeek
-  calculations.forEach(entry => {
-    const { day } = entry
-    const currentDate = new Date(day)
+  calculations.forEach((entry) => {
+    const currentDate = new Date(entry)
     currentDate.setDate(currentDate.getDate() - 1)
     dayOfWeek = currentDate.getDay()
     row[dayOfWeek] = entry
@@ -27,7 +28,7 @@ const calculateDailyData = calculations => {
   return calendar
 }
 
-const calculateMontlyData = calculations => {
+const calculateMonthlyData = (calculations) => {
   const calendar = []
 
   let row = CalendarRow(4)
@@ -42,4 +43,4 @@ const calculateMontlyData = calculations => {
   return calendar
 }
 
-export { calculateDailyData, calculateMontlyData }
+export { calculateDailyData, calculateMonthlyData }

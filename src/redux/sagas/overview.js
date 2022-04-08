@@ -1,4 +1,4 @@
-import { all, takeEvery, takeLatest, put } from "redux-saga/effects"
+import { all, takeEvery, takeLatest, put, delay } from "redux-saga/effects"
 import actions from "../actions"
 import storeSelector from "../selectors"
 
@@ -10,12 +10,15 @@ export function* FETCH_OVERVIEW() {
 }
 
 export function* FILTER_OVERVIEW({ payload }) {
+  yield put({ type: SET_STATE, payload: { loading: true } })
+  yield delay(100)
   let filters = storeSelector((store) => store.overview.filters)
   filters = { ...filters, ...payload }
   yield put({
     type: SET_STATE,
     payload: { filters },
   })
+  yield put({ type: SET_STATE, payload: { loading: false } })
 }
 
 export default function* rootSaga() {
