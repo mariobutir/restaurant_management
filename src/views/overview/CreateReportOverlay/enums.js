@@ -2,15 +2,11 @@ const toArray = (obj) => {
   return Object.keys(obj).map((item) => ({ id: item, name: obj[item] }))
 }
 
-const Currencies = {
-  test: "Test",
+const Products = {
+  1: "Chicken",
+  2: "Beef",
 }
 
-const ReportTypes = {
-  test: "Test",
-}
+const ProductsArray = toArray(Products)
 
-const CurrenciesArray = toArray(Currencies)
-const ReportTypesArray = toArray(ReportTypes)
-
-export { Currencies, CurrenciesArray, ReportTypes, ReportTypesArray }
+export { Products, ProductsArray }

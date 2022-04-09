@@ -18,7 +18,8 @@ $secondary-color: #5981cb;
 
 $background-color: #f0f2f5;
 
-$error-color: #ca2e55;
+$success-color: #7fb069;
+$error-color: #ca2e55; // error state color
 
 $divider-color: $secondary-theme-color;
 
@@ -45,4 +46,21 @@ $component-color-accent: #eeeeee;
 
 @mixin shadow-right {
   box-shadow: 15px 0 30px rgba(0, 0, 0, 0.3);
+}
+
+@mixin shadow-element-corner {
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.success-colored {
+  color: $success-color;
+}
+
+.error-colored {
+  color: $error-color;
+}
+
+.title {
+  font-size: 18px;
+  color: $secondary-theme-color;
 }

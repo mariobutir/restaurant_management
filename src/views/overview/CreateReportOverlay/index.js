@@ -1,17 +1,13 @@
 import React, { useEffect } from "react"
 import { useDispatch } from "react-redux"
-import { Card, DatePicker, Form, Input, Row, Select, Button } from "antd"
-import moment from "moment"
-import { CurrenciesArray, ReportTypesArray } from "./enums"
+import { Button, Card, Form, Input, Select } from "antd"
+import { ProductsArray } from "./enums"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {
-  faBuilding,
-  faHouse,
-  faPercent,
-} from "@fortawesome/free-solid-svg-icons"
+import { faTruck } from "@fortawesome/free-solid-svg-icons"
 import "./styles.scss"
 import Overlay from "../../../components/Overlay"
 import actions from "../../../redux/actions"
+import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons"
 
 const layout = {
   labelCol: { span: 8 },
@@ -51,7 +47,7 @@ const CreateReportOverlay = (props) => {
     }
     const handleSave = () => {
       form.submit()
-      // overlay.hide()
+      overlay.hide()
     }
     return (
       <div className="overlay-footer d-flex w-100 justify-content-between align-center">
@@ -74,8 +70,6 @@ const CreateReportOverlay = (props) => {
     console.log("changed value")
   }
 
-  const disabledEntry = false
-
   return (
     <Overlay className="add-report-overlay" overlay={overlay} header={false}>
       <Form
@@ -85,46 +79,111 @@ const CreateReportOverlay = (props) => {
         onValuesChange={handleValueChange}
         {...layout}
       >
-        <Row className="report-save-update-row">
-          <Card
-            title={<CardHeader title="General information" icon={faHouse} />}
-          >
-            <Form.Item
-              name="key_account"
-              label="Key Account"
-              initialValue="Mario Butir"
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item name="date" label="Date" initialValue={moment()}>
-              <DatePicker format="DD.MM.YYYY" disabled />
-            </Form.Item>
-          </Card>
-          <Card
-            title={<CardHeader title="Seller information" icon={faBuilding} />}
-          >
-            <Form.Item name="currency" label="Currency">
-              <Select disabled={disabledEntry}>
-                {CurrenciesArray.map((item) => (
-                  <Select.Option key={item.id}>{item.name}</Select.Option>
-                ))}
-              </Select>
-            </Form.Item>
-          </Card>
-          <Card title={<CardHeader title="Report details" icon={faPercent} />}>
-            <Form.Item
-              name="report_type"
-              label="Report Type"
-              initialValue={ReportTypesArray[0].id}
-            >
-              <Select>
-                {ReportTypesArray.map((item) => (
-                  <Select.Option key={item.id}>{item.name}</Select.Option>
-                ))}
-              </Select>
-            </Form.Item>
-          </Card>
-        </Row>
+        <Card title={<CardHeader title="Vendor" icon={faTruck} />}>
+          <Form.Item className="product-entry-wrapper">
+            <Form.List name="products" initialValue={[{}]}>
+              {(fields, { add, remove }) => (
+                <>
+                  {fields.map(({ key, name, ...restField }, index) => (
+                    <div key={key} className="product-entry">
+                      <div className="index-container">
+                        <div className="numbering">{index + 1}.</div>
+                      </div>
+                      <div className="product-entry-section">
+                        <div className="d-flex justify-content-between">
+                          <div className="d-flex">
+                            <Form.Item
+                              className="me-2"
+                              {...restField}
+                              name={[name, "product_id"]}
+                            >
+                              <Select
+                                showSearch
+                                placeholder="Select product"
+                                optionFilterProp="children"
+                                filterOption={(input, option) =>
+                                  option.children
+                                    .toLowerCase()
+                                    .indexOf(input.toLowerCase()) >= 0
+                                }
+                                style={{ width: 250 }}
+                              >
+                                {ProductsArray.map((product) => (
+                                  <Select.Option
+                                    key={product.id}
+                                    value={product.name}
+                                  >
+                                    {product.name}
+                                  </Select.Option>
+                                ))}
+                              </Select>
+                            </Form.Item>
+                            <Form.Item
+                              className="me-2"
+                              {...restField}
+                              name={[name, "quantity"]}
+                            >
+                              <Input
+                                placeholder="Quantity"
+                                style={{ width: 100 }}
+                              />
+                            </Form.Item>
+                            <Form.Item
+                              className="me-2"
+                              {...restField}
+                              name={[name, "rate"]}
+                            >
+                              <Input
+                                placeholder="Rate"
+                                style={{ width: 150 }}
+                              />
+                            </Form.Item>
+                            <Form.Item
+                              className="me-2"
+                              {...restField}
+                              name={[name, "tax"]}
+                            >
+                              <Input placeholder="Tax" style={{ width: 150 }} />
+                            </Form.Item>
+                          </div>
+                          <div className="d-flex">
+                            <Form.Item
+                              className="me-2 total"
+                              label="Total"
+                              {...restField}
+                              name={[name, "total"]}
+                            >
+                              <Input
+                                placeholder="Total"
+                                defaultValue="10000"
+                                style={{
+                                  border: 0,
+                                }}
+                              />
+                            </Form.Item>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="product-actions">
+                        <MinusCircleOutlined onClick={() => remove(name)} />
+                      </div>
+                    </div>
+                  ))}
+                  <Form.Item>
+                    <Button
+                      type="dashed"
+                      onClick={() => add()}
+                      block
+                      icon={<PlusOutlined />}
+                    >
+                      Add product
+                    </Button>
+                  </Form.Item>
+                </>
+              )}
+            </Form.List>
+          </Form.Item>
+        </Card>
       </Form>
       <OverlayFooter />
     </Overlay>

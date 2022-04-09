@@ -13,12 +13,15 @@
     padding-bottom: 64px;
   }
 
-  .report-save-update-row {
-    padding: 30px;
-    min-width: 100vw;
+  .ant-form {
+    width: 100%;
 
     .ant-form-item-control-input {
-      min-width: 100%;
+      width: 100%;
+    }
+
+    .total > .ant-form-item-label {
+      display: block;
     }
   }
 
@@ -54,6 +57,50 @@
     padding: 0 20px;
     background-color: white;
     @include vars.shadow-top;
+  }
+
+  .product-entry-wrapper {
+    .ant-col {
+      max-width: 100%;
+      width: 100%;
+    }
+  }
+
+  .product-entry {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid rgb(224, 224, 224);
+    border-radius: 10px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    @include vars.shadow-element-corner;
+
+    .index-container {
+      background-color: rgb(224, 224, 224);
+      width: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+      font-weight: bold;
+    }
+
+    .product-entry-section {
+      flex: 1 1;
+      margin: 15px 10px 0;
+
+      .ant-col {
+        width: 50%;
+      }
+    }
+
+    .product-actions {
+      display: flex;
+      align-items: center;
+      color: red;
+      margin-right: 10px;
+      justify-content: center;
+    }
   }
 
   .me-2 {
