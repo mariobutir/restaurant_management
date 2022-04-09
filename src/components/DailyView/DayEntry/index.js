@@ -5,7 +5,7 @@ import "./styles.scss"
 import { EditOutlined, FileTextOutlined, PlusOutlined } from "@ant-design/icons"
 
 const DayEntry = (props) => {
-  const { entry } = props
+  const { entry, overlay } = props
   const selected = false
 
   const handleEditClick = () => {
@@ -17,6 +17,7 @@ const DayEntry = (props) => {
   }
 
   const handlePlusClick = () => {
+    overlay.show()
     console.log(entry)
   }
 

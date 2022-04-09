@@ -1,0 +1,51 @@
+@use '../../constants' as vars;
+
+.fullscreen-overlay {
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  z-index: 20;
+  position: fixed;
+  overflow: auto;
+  left: 0;
+  top: 0;
+
+  @include vars.animated-style;
+
+  &.hidden {
+    opacity: 0;
+  }
+
+  &.visible {
+    opacity: 1;
+  }
+
+  .fullscreen-overlay-header {
+    height: vars.$header-height;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .fullscreen-overlay-body {
+    height: calc(100vh - #{vars.$header-height});
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    overflow-x: scroll;
+  }
+
+  &.no-header {
+    .fullscreen-overlay-header {
+      display: none;
+    }
+    .fullscreen-overlay-body {
+      height: 100vh;
+    }
+  }
+
+  &.dark {
+    background-color: vars.$theme-color;
+    color: white;
+  }
+}

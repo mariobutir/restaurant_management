@@ -1,6 +1,7 @@
 import React from "react"
 import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom"
 import Overview from "./views/overview/Overview"
+import "./App.scss"
 
 const routes = [
   {

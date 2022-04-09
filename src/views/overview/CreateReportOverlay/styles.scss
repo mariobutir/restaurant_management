@@ -1,0 +1,62 @@
+@use '../../../constants' as vars;
+
+.add-report-overlay {
+  background-color: vars.$background-color;
+
+  .overlay-title {
+    font-size: 16px;
+    color: vars.$secondary-theme-color;
+  }
+
+  .fullscreen-overlay-body {
+    display: block;
+    padding-bottom: 64px;
+  }
+
+  .report-save-update-row {
+    padding: 30px;
+    min-width: 100vw;
+
+    .ant-form-item-control-input {
+      min-width: 100%;
+    }
+  }
+
+  .ant-row {
+    .ant-card {
+      flex: 1 1;
+      &:not(:last-child) {
+        margin-right: 20px;
+      }
+    }
+  }
+
+  .ant-card {
+    margin-bottom: 20px;
+    @include vars.shadow-element;
+  }
+
+  .ant-picker {
+    width: 100%;
+  }
+
+  .ant-form-item {
+    margin-bottom: 15px;
+  }
+
+  .overlay-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    border-top: 1px solid lightgray;
+    height: 64px;
+    padding: 0 20px;
+    background-color: white;
+    @include vars.shadow-top;
+  }
+
+  .me-2 {
+    margin-right: 10px;
+  }
+}

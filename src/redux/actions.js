@@ -3,6 +3,10 @@ const actions = {
   SET_OVERVIEW_STATE: "overview/SET_OVERVIEW_STATE",
   FETCH_OVERVIEW: "overview/FETCH_OVERVIEW",
   FILTER_OVERVIEW: "overview/FILTER_OVERVIEW",
+
+  // REPORTS
+  SET_REPORT_STATE: "overview/SET_REPORT_STATE",
+  FETCH_REPORT_FORM_DATA: "reports/FETCH_REPORT_FORM_DATA",
 }
 
 export default actions

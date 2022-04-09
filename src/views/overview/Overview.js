@@ -5,24 +5,30 @@ import enums from "../../enums"
 import DailyView from "../../components/DailyView"
 
 import "./Overview.scss"
+import useModal from "../../hooks/useModal"
+import CreateReportOverlay from "./CreateReportOverlay"
 
 const GranulatedView = (props) => {
-  const { type, ...rest } = props
-  if (type === enums.IntervalType.Day) return <DailyView {...rest} />
+  const { type, overlay, ...rest } = props
+  if (type === enums.IntervalType.Day)
+    return <DailyView overlay={overlay} {...rest} />
   return <div />
 }
 
 const Overview = () => {
   const {
     loading,
-    filters: { type }
+    filters: { type },
   } = useSelector((store) => store.overview)
+
+  const addNewOverlay = useModal({ defaultVisible: false })
 
   return (
     <div className="overview">
+      <CreateReportOverlay overlay={addNewOverlay} />
       <FilterBar />
       <ViewContent className="overview-content" spinning={loading}>
-        <GranulatedView type={type} />
+        <GranulatedView type={type} overlay={addNewOverlay} />
       </ViewContent>
     </div>
   )
