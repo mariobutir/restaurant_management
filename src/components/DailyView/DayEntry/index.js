@@ -8,7 +8,15 @@ const DayEntry = (props) => {
   const { entry } = props
   const selected = false
 
-  const handleCardClick = () => {
+  const handleEditClick = () => {
+    console.log(entry)
+  }
+
+  const handleDetailsClick = () => {
+    console.log(entry)
+  }
+
+  const handlePlusClick = () => {
     console.log(entry)
   }
 
@@ -20,8 +28,8 @@ const DayEntry = (props) => {
   const cardDetails = () => {
     if (date.isBefore(today, "day")) {
       actions = [
-        <FileTextOutlined key="details" onClick={handleCardClick} />,
-        <EditOutlined key="edit" onClick={handleCardClick} />,
+        <FileTextOutlined key="details" onClick={handleDetailsClick} />,
+        <EditOutlined key="edit" onClick={handleEditClick} />,
       ]
       return (
         <Card className="date-card" actions={actions}>
@@ -34,7 +42,7 @@ const DayEntry = (props) => {
         </Card>
       )
     } else {
-      actions = [<PlusOutlined key="add-report" onClick={handleCardClick} />]
+      actions = [<PlusOutlined key="add-report" onClick={handlePlusClick} />]
       return <Card className="date-card" actions={actions} />
     }
   }
