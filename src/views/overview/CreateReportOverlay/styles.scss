@@ -2,6 +2,7 @@
 
 .add-report-overlay {
   background-color: vars.$background-color;
+  padding-bottom: 50px;
 
   .overlay-title {
     font-size: 16px;
@@ -15,6 +16,16 @@
 
   .ant-form {
     width: 100%;
+
+    .fix {
+      display: flex;
+      align-items: center;
+
+      .vendor-remove {
+        margin-left: 12px;
+        color: red;
+      }
+    }
 
     .ant-form-item-control-input {
       width: 100%;

@@ -1,13 +1,14 @@
 import React, { useEffect } from "react"
 import { useDispatch } from "react-redux"
-import { Button, Card, Form, Input, Select } from "antd"
-import { ProductsArray } from "./enums"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTruck } from "@fortawesome/free-solid-svg-icons"
+import { Button, Card, Form } from "antd"
 import "./styles.scss"
 import Overlay from "../../../components/Overlay"
 import actions from "../../../redux/actions"
+
+import VendorForm from "./VendorForm"
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons"
+import { faTruck } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const layout = {
   labelCol: { span: 8 },
@@ -15,11 +16,14 @@ const layout = {
 }
 
 const CardHeader = (props) => {
-  const { icon, title } = props
+  const { icon, title, remove } = props
   return (
     <div className="fix">
       {icon && <FontAwesomeIcon className="me-2" icon={icon} />}
       {title}
+      <div className="product-actions vendor-remove">
+        <MinusCircleOutlined onClick={() => remove()} />
+      </div>
     </div>
   )
 }
@@ -36,10 +40,6 @@ const CreateReportOverlay = (props) => {
       dispatch({ type: actions.FETCH_REPORT_FORM_DATA })
     }
   }, [overlay.visible])
-
-  const handleOnFinish = (values) => {
-    console.log("save report")
-  }
 
   const OverlayFooter = () => {
     const handleDiscard = () => {
@@ -66,6 +66,10 @@ const CreateReportOverlay = (props) => {
     )
   }
 
+  const handleOnFinish = (values) => {
+    console.log("save report")
+  }
+
   const handleValueChange = (changedValues, currentValues) => {
     console.log("changed value")
   }
@@ -79,111 +83,39 @@ const CreateReportOverlay = (props) => {
         onValuesChange={handleValueChange}
         {...layout}
       >
-        <Card title={<CardHeader title="Vendor" icon={faTruck} />}>
-          <Form.Item className="product-entry-wrapper">
-            <Form.List name="products" initialValue={[{}]}>
-              {(fields, { add, remove }) => (
-                <>
-                  {fields.map(({ key, name, ...restField }, index) => (
-                    <div key={key} className="product-entry">
-                      <div className="index-container">
-                        <div className="numbering">{index + 1}.</div>
-                      </div>
-                      <div className="product-entry-section">
-                        <div className="d-flex justify-content-between">
-                          <div className="d-flex">
-                            <Form.Item
-                              className="me-2"
-                              {...restField}
-                              name={[name, "product_id"]}
-                            >
-                              <Select
-                                showSearch
-                                placeholder="Select product"
-                                optionFilterProp="children"
-                                filterOption={(input, option) =>
-                                  option.children
-                                    .toLowerCase()
-                                    .indexOf(input.toLowerCase()) >= 0
-                                }
-                                style={{ width: 250 }}
-                              >
-                                {ProductsArray.map((product) => (
-                                  <Select.Option
-                                    key={product.id}
-                                    value={product.name}
-                                  >
-                                    {product.name}
-                                  </Select.Option>
-                                ))}
-                              </Select>
-                            </Form.Item>
-                            <Form.Item
-                              className="me-2"
-                              {...restField}
-                              name={[name, "quantity"]}
-                            >
-                              <Input
-                                placeholder="Quantity"
-                                style={{ width: 100 }}
-                              />
-                            </Form.Item>
-                            <Form.Item
-                              className="me-2"
-                              {...restField}
-                              name={[name, "rate"]}
-                            >
-                              <Input
-                                placeholder="Rate"
-                                style={{ width: 150 }}
-                              />
-                            </Form.Item>
-                            <Form.Item
-                              className="me-2"
-                              {...restField}
-                              name={[name, "tax"]}
-                            >
-                              <Input placeholder="Tax" style={{ width: 150 }} />
-                            </Form.Item>
-                          </div>
-                          <div className="d-flex">
-                            <Form.Item
-                              className="me-2 total"
-                              label="Total"
-                              {...restField}
-                              name={[name, "total"]}
-                            >
-                              <Input
-                                placeholder="Total"
-                                defaultValue="10000"
-                                style={{
-                                  border: 0,
-                                }}
-                              />
-                            </Form.Item>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="product-actions">
-                        <MinusCircleOutlined onClick={() => remove(name)} />
-                      </div>
-                    </div>
-                  ))}
+        <Form.Item className="product-entry-wrapper">
+          <Form.List name="vendors" initialValue={[{}]}>
+            {(fields, { add, remove }) => (
+              <>
+                {fields.map((field) => (
                   <Form.Item>
-                    <Button
-                      type="dashed"
-                      onClick={() => add()}
-                      block
-                      icon={<PlusOutlined />}
+                    <Card
+                      title={
+                        <CardHeader
+                          title="Vendor"
+                          icon={faTruck}
+                          remove={() => remove(field.name)}
+                        />
+                      }
                     >
-                      Add product
-                    </Button>
+                      <VendorForm fieldKey={field.name} />
+                    </Card>
                   </Form.Item>
-                </>
-              )}
-            </Form.List>
-          </Form.Item>
-        </Card>
+                ))}
+                <Form.Item>
+                  <Button
+                    type="dashed"
+                    onClick={() => add()}
+                    block
+                    icon={<PlusOutlined />}
+                  >
+                    Add vendor
+                  </Button>
+                </Form.Item>
+              </>
+            )}
+          </Form.List>
+        </Form.Item>
       </Form>
       <OverlayFooter />
     </Overlay>
