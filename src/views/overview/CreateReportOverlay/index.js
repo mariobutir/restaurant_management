@@ -9,7 +9,7 @@ import VendorForm from "./VendorForm"
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons"
 import { faTruck } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { ProductsArray } from "./enums"
+import { VendorsArray } from "./enums"
 import moment from "moment"
 
 const layout = {
@@ -161,7 +161,7 @@ const CreateReportOverlay = (props) => {
                             }
                             style={{ width: 250 }}
                           >
-                            {ProductsArray.map((product) => (
+                            {VendorsArray.map((product) => (
                               <Select.Option
                                 key={product.id}
                                 value={product.name}
