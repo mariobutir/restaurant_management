@@ -70,13 +70,14 @@ const VendorForm = (props) => {
                     <div className="d-flex">
                       <Form.Item
                         className="me-2 total"
-                        label="Total"
+                        label={<i>Item total</i>}
                         {...restField}
                         name={[name, "total"]}
+                        initialValue={10000}
                       >
                         <Input
                           placeholder="Total"
-                          defaultValue="10000"
+                          disabled={true}
                           style={{
                             border: 0,
                           }}

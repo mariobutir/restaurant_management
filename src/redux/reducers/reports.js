@@ -1,6 +1,7 @@
 import actions from "../actions"
 
 const initialState = {
+  date: "",
   test: 0,
   loading: false,
   loadingFilters: false,

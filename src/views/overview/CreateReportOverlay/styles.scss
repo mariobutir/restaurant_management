@@ -17,6 +17,10 @@
   .ant-form {
     width: 100%;
 
+    .vendor-card {
+      margin: 15px 15px 0 15px;
+    }
+
     .fix {
       display: flex;
       align-items: center;
@@ -33,6 +37,11 @@
 
     .total > .ant-form-item-label {
       display: block;
+    }
+
+    .total input {
+      background-color: white;
+      color: black;
     }
   }
 
