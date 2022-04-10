@@ -1,7 +1,6 @@
 import { Button, Form, Input, Select } from "antd"
 import { ProductsArray } from "../enums"
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons"
-import React from "react"
 
 const VendorForm = (props) => {
   const { fieldKey } = props
@@ -97,7 +96,7 @@ const VendorForm = (props) => {
                         label={<i>Item total</i>}
                         {...restField}
                         name={[name, "total"]}
-                        initialValue={10000}
+                        initialValue={0}
                       >
                         <Input
                           placeholder="Total"

@@ -17,6 +17,16 @@ const layout = {
   wrapperCol: { span: 20 },
 }
 
+const formatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 0,
+
+  // These options are needed to round to whole numbers if that's what you want.
+  //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+  //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+})
+
 const CardHeader = (props) => {
   const { icon, title, remove } = props
   return (
@@ -83,7 +93,24 @@ const CreateReportOverlay = (props) => {
   }
 
   const handleValueChange = (changedValues, currentValues) => {
-    console.log("changed value:", changedValues)
+    const { vendors } = changedValues
+    const vendorIndex = vendors.length - 1
+    if ("products" in vendors[vendorIndex]) {
+      const { products } = vendors[vendorIndex]
+      const productIndex = products.length - 1
+      if (
+        "rate" in products[productIndex] ||
+        "quantity" in products[productIndex]
+      ) {
+        const changedProduct =
+          currentValues.vendors[vendorIndex].products[productIndex]
+        changedProduct.total = formatter.format(
+          (changedProduct.rate || 0) * (changedProduct.quantity || 0)
+        )
+
+        form.setFieldsValue(currentValues)
+      }
+    }
   }
 
   return (
@@ -166,6 +193,7 @@ const CreateReportOverlay = (props) => {
                 ))}
                 <Form.Item>
                   <Button
+                    className="add-vendor-button"
                     type="dashed"
                     onClick={() => add()}
                     block
