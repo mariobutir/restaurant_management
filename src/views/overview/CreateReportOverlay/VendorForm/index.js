@@ -23,6 +23,12 @@ const VendorForm = (props) => {
                         className="me-2"
                         {...restField}
                         name={[name, "product_id"]}
+                        rules={[
+                          {
+                            required: true,
+                            message: "Choosing a product is required",
+                          },
+                        ]}
                       >
                         <Select
                           showSearch
@@ -49,13 +55,25 @@ const VendorForm = (props) => {
                         className="me-2"
                         {...restField}
                         name={[name, "quantity"]}
+                        rules={[
+                          {
+                            required: true,
+                            message: "Quantity is required",
+                          },
+                        ]}
                       >
-                        <Input placeholder="Quantity" style={{ width: 100 }} />
+                        <Input placeholder="Quantity" style={{ width: 150 }} />
                       </Form.Item>
                       <Form.Item
                         className="me-2"
                         {...restField}
                         name={[name, "rate"]}
+                        rules={[
+                          {
+                            required: true,
+                            message: "Rate is required",
+                          },
+                        ]}
                       >
                         <Input placeholder="Rate" style={{ width: 150 }} />
                       </Form.Item>
@@ -63,6 +81,12 @@ const VendorForm = (props) => {
                         className="me-2"
                         {...restField}
                         name={[name, "tax"]}
+                        rules={[
+                          {
+                            required: true,
+                            message: "Tax is required",
+                          },
+                        ]}
                       >
                         <Input placeholder="Tax" style={{ width: 150 }} />
                       </Form.Item>

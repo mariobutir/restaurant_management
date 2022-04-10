@@ -51,31 +51,35 @@ const CreateReportOverlay = (props) => {
       form.resetFields()
       form.setFieldsValue({ vendors: [{}] })
     }
-    const handleSave = () => {
-      form.submit()
-      overlay.hide()
-    }
+
     return (
       <div className="overlay-footer d-flex w-100 justify-content-between align-center">
         <div className="overlay-title">
           Add new report on: <b>{moment(date).format("dddd, MMMM Do YYYY")}</b>
         </div>
         <div className="d-flex">
-          <div className="me-3">
-            <Button className="me-2" onClick={handleDiscard}>
-              Discard
-            </Button>
-            <Button type="primary" onClick={handleSave}>
+          <Button className="me-2" onClick={handleDiscard}>
+            Discard
+          </Button>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
               Save
             </Button>
-          </div>
+          </Form.Item>
         </div>
       </div>
     )
   }
 
   const handleOnFinish = (values) => {
-    console.log(values)
+    console.log("submitted")
+    overlay.hide()
+    form.resetFields()
+    form.setFieldsValue({ vendors: [{}] })
+  }
+
+  const handleOnFinishFailed = (values) => {
+    console.log("failed")
   }
 
   const handleValueChange = (changedValues, currentValues) => {
@@ -88,6 +92,7 @@ const CreateReportOverlay = (props) => {
         form={form}
         layout="horizontal"
         onFinish={handleOnFinish}
+        onFinishFailed={handleOnFinishFailed}
         onValuesChange={handleValueChange}
         {...layout}
       >
@@ -111,6 +116,12 @@ const CreateReportOverlay = (props) => {
                         <Form.Item
                           className="me-2"
                           name={[field.name, "vendor_id"]}
+                          rules={[
+                            {
+                              required: true,
+                              message: "Choosing a vendor is required",
+                            },
+                          ]}
                         >
                           <Select
                             showSearch
@@ -136,6 +147,12 @@ const CreateReportOverlay = (props) => {
                         <Form.Item
                           className="me-2"
                           name={[field.name, "invoice_number"]}
+                          rules={[
+                            {
+                              required: true,
+                              message: "Invoice number is required",
+                            },
+                          ]}
                         >
                           <Input
                             placeholder="Invoice number"
@@ -161,8 +178,8 @@ const CreateReportOverlay = (props) => {
             )}
           </Form.List>
         </Form.Item>
+        <OverlayFooter />
       </Form>
-      <OverlayFooter />
     </Overlay>
   )
 }
