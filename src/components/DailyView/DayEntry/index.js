@@ -2,34 +2,26 @@ import moment from "moment"
 import { Card } from "antd"
 
 import "./styles.scss"
-import { EditOutlined, FileTextOutlined, PlusOutlined } from "@ant-design/icons"
+import { EditOutlined, PlusOutlined } from "@ant-design/icons"
+import formatter from "../../../utils"
 import { useDispatch } from "react-redux"
 import actions from "../../../redux/actions"
 
 const DayEntry = (props) => {
-  const { entry, overlay } = props
+  const { entry, details, overlay } = props
+  const dateString = moment(entry).format("DD.MM.YYYY")
 
   const dispatch = useDispatch()
-
-  const updateSelectedDate = () => {
-    dispatch({
-      type: actions.SET_REPORT_DATE,
-      payload: entry,
-    })
-  }
 
   const selected = false
 
   const handleEditClick = () => {
-    console.log(entry)
-  }
-
-  const handleDetailsClick = () => {
-    console.log(entry)
+    dispatch({ type: actions.SET_REPORT_DATE, payload: { date: dateString } })
+    overlay.show()
   }
 
   const handlePlusClick = () => {
-    updateSelectedDate(entry)
+    dispatch({ type: actions.SET_REPORT_DATE, payload: { date: dateString } })
     overlay.show()
   }
 
@@ -39,17 +31,26 @@ const DayEntry = (props) => {
 
   let card_actions = []
   const cardDetails = () => {
-    if (date.isBefore(today, "day")) {
-      card_actions = [
-        <FileTextOutlined key="details" onClick={handleDetailsClick} />,
-        <EditOutlined key="edit" onClick={handleEditClick} />,
-      ]
+    let totalVendors = 0
+    let totalProducts = 0
+    let totalCost = 0
+    if (Object.keys(details).length !== 0) {
+      totalVendors = details.vendors.length
+      details.vendors.forEach((vendor) => {
+        totalProducts += 1
+        vendor.products.forEach((product) => {
+          totalCost += product.quantity * product.rate
+        })
+      })
+      card_actions = [<EditOutlined key="edit" onClick={handleEditClick} />]
       return (
         <Card className="date-card" actions={card_actions}>
           <div className="report-details">
-            Expenses: 100
+            Vendors: {totalVendors}
             <br />
-            Balance: 100
+            Products: {totalProducts}
+            <br />
+            Spent: {formatter.format(totalCost)}
             <br />
           </div>
         </Card>

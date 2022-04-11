@@ -11,7 +11,7 @@ export function* FETCH_OVERVIEW() {
 
 export function* FILTER_OVERVIEW({ payload }) {
   yield put({ type: SET_STATE, payload: { loading: true } })
-  yield delay(100)
+  yield delay(150)
   let filters = storeSelector((store) => store.overview.filters)
   filters = { ...filters, ...payload }
   yield put({

@@ -31,6 +31,8 @@ const DailyView = (props) => {
     filters: { date },
   } = useSelector((store) => store.overview)
 
+  const reports = useSelector((store) => store.reports.details)
+
   const calendar = calculateDailyData(generateDaysArray(date))
 
   return (
@@ -46,7 +48,13 @@ const DailyView = (props) => {
         <Row key={row.hash()} className="overview-row">
           {row.map((entry) => (
             <Col key={entry + Math.random()}>
-              {!isEmpty(entry) && <DayEntry entry={entry} {...props} />}
+              {!isEmpty(entry) && (
+                <DayEntry
+                  entry={entry}
+                  details={reports[moment(entry).format("DD.MM.YYYY")] || {}}
+                  {...props}
+                />
+              )}
             </Col>
           ))}
         </Row>

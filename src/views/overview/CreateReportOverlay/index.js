@@ -1,9 +1,8 @@
 import React, { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { Button, Card, Form, Input, Select } from "antd"
 import "./styles.scss"
 import Overlay from "../../../components/Overlay"
-import actions from "../../../redux/actions"
 
 import VendorForm from "./VendorForm"
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons"
@@ -11,21 +10,12 @@ import { faTruck } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { VendorsArray } from "./enums"
 import moment from "moment"
+import formatter from "../../../utils"
 
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 20 },
 }
-
-const formatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  minimumFractionDigits: 0,
-
-  // These options are needed to round to whole numbers if that's what you want.
-  //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
-  //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
-})
 
 const CardHeader = (props) => {
   const { icon, title, remove } = props
@@ -43,15 +33,21 @@ const CardHeader = (props) => {
 const CreateReportOverlay = (props) => {
   const { overlay } = props
 
-  const { date } = useSelector((store) => store.reports)
+  const { date, details } = useSelector((store) => store.reports)
+  let initialFormValue = details[date] || {}
 
-  const [form] = Form.useForm()
-
-  const dispatch = useDispatch()
+  let [form] = Form.useForm()
 
   useEffect(() => {
     if (overlay.visible) {
-      dispatch({ type: actions.FETCH_REPORT_FORM_DATA })
+      if (Object.keys(initialFormValue).length !== 0) {
+        initialFormValue.vendors.forEach((vendor) => {
+          vendor.products.forEach((product) => {
+            product["total"] = formatter.format(product.quantity * product.rate)
+          })
+        })
+      }
+      form.setFieldsValue(initialFormValue)
     }
   }, [overlay.visible])
 
@@ -59,7 +55,12 @@ const CreateReportOverlay = (props) => {
     const handleDiscard = () => {
       overlay.hide()
       form.resetFields()
-      form.setFieldsValue({ vendors: [{}] })
+      form.setFieldsValue({})
+    }
+
+    const handleReset = () => {
+      form.resetFields()
+      form.setFieldsValue(initialFormValue)
     }
 
     return (
@@ -68,8 +69,11 @@ const CreateReportOverlay = (props) => {
           Add new report on: <b>{moment(date).format("dddd, MMMM Do YYYY")}</b>
         </div>
         <div className="d-flex">
-          <Button className="me-2" onClick={handleDiscard}>
+          <Button danger className="me-2" onClick={handleDiscard}>
             Discard
+          </Button>
+          <Button className="me-2" onClick={handleReset}>
+            Reset
           </Button>
           <Form.Item>
             <Button type="primary" htmlType="submit">
@@ -82,7 +86,7 @@ const CreateReportOverlay = (props) => {
   }
 
   const handleOnFinish = (values) => {
-    console.log("submitted")
+    console.log("submitted", values)
     overlay.hide()
     form.resetFields()
     form.setFieldsValue({ vendors: [{}] })
@@ -95,19 +99,22 @@ const CreateReportOverlay = (props) => {
   const handleValueChange = (changedValues, currentValues) => {
     const { vendors } = changedValues
     const vendorIndex = vendors.length - 1
-    if ("products" in vendors[vendorIndex]) {
+    if (
+      vendors[vendorIndex] !== undefined &&
+      "products" in vendors[vendorIndex]
+    ) {
       const { products } = vendors[vendorIndex]
       const productIndex = products.length - 1
       if (
-        "rate" in products[productIndex] ||
-        "quantity" in products[productIndex]
+        products[productIndex] !== undefined &&
+        ("rate" in products[productIndex] ||
+          "quantity" in products[productIndex])
       ) {
         const changedProduct =
           currentValues.vendors[vendorIndex].products[productIndex]
         changedProduct.total = formatter.format(
           (changedProduct.rate || 0) * (changedProduct.quantity || 0)
         )
-
         form.setFieldsValue(currentValues)
       }
     }
@@ -121,14 +128,15 @@ const CreateReportOverlay = (props) => {
         onFinish={handleOnFinish}
         onFinishFailed={handleOnFinishFailed}
         onValuesChange={handleValueChange}
+        initialValues={{}}
         {...layout}
       >
         <Form.Item className="product-entry-wrapper">
-          <Form.List name="vendors" initialValue={[{}]}>
+          <Form.List name="vendors">
             {(fields, { add, remove }) => (
               <>
                 {fields.map((field) => (
-                  <Form.Item key={field.key}>
+                  <Form.Item key={field.name}>
                     <Card
                       className="vendor-card"
                       title={
@@ -164,7 +172,7 @@ const CreateReportOverlay = (props) => {
                             {VendorsArray.map((product) => (
                               <Select.Option
                                 key={product.id}
-                                value={product.name}
+                                value={product.id}
                               >
                                 {product.name}
                               </Select.Option>

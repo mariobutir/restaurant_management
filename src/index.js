@@ -8,6 +8,7 @@ import "./index.scss"
 import "antd/dist/antd.min.css"
 import App from "./App"
 import reportWebVitals from "./reportWebVitals"
+import "./antErrorSuppressor"
 
 const history = createBrowserHistory()
 

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Button, DatePicker, Radio } from "antd"
 import moment from "moment"
@@ -27,12 +27,17 @@ const DateSelect = () => {
   const { date, type } = useSelector((store) => store.overview.filters)
   const dispatch = useDispatch()
 
+  useEffect(() => {
+    dispatch({ type: actions.FETCH_REPORTS, payload: { date: date } })
+  }, [])
+
   const updateFilter = (filter) => {
     dispatch({
       type: actions.FILTER_OVERVIEW,
       payload: filter,
     })
     dispatch({ type: actions.FETCH_OVERVIEW })
+    dispatch({ type: actions.FETCH_REPORTS, payload: filter })
   }
 
   const handlePickerChange = (val) => {

@@ -7,7 +7,7 @@ const VendorForm = (props) => {
 
   return (
     <Form.Item className="product-entry-wrapper">
-      <Form.List name={[fieldKey, "products"]} initialValue={[{}]}>
+      <Form.List name={[fieldKey, "products"]}>
         {(fields, { add, remove }) => (
           <>
             {fields.map(({ key, name, ...restField }, index) => (
@@ -41,10 +41,7 @@ const VendorForm = (props) => {
                           style={{ width: 250 }}
                         >
                           {ProductsArray.map((product) => (
-                            <Select.Option
-                              key={product.id}
-                              value={product.name}
-                            >
+                            <Select.Option key={product.id} value={product.id}>
                               {product.name}
                             </Select.Option>
                           ))}
@@ -96,7 +93,6 @@ const VendorForm = (props) => {
                         label={<i>Item total</i>}
                         {...restField}
                         name={[name, "total"]}
-                        initialValue={0}
                       >
                         <Input
                           placeholder="Total"
