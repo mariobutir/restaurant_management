@@ -6,7 +6,7 @@ import DailyView from "../../components/DailyView"
 
 import "./Overview.scss"
 import useModal from "../../hooks/useModal"
-import CreateReportOverlay from "./CreateReportOverlay"
+import CreateReportOverlay from "./CreateUpdateReportOverlay"
 
 const GranulatedView = (props) => {
   const { type, overlay, ...rest } = props

@@ -36,6 +36,7 @@ const CreateReportOverlay = (props) => {
   const { date, details } = useSelector((store) => store.reports)
   const initialFormValue = details[date] || {}
   const isEditMode = Object.keys(initialFormValue).length !== 0
+  const createReportData = { vendors: [{ products: [{}] }] }
 
   let [form] = Form.useForm()
 
@@ -47,8 +48,10 @@ const CreateReportOverlay = (props) => {
             product["total"] = formatter.format(product.quantity * product.rate)
           })
         })
+        form.setFieldsValue(initialFormValue)
+      } else {
+        form.setFieldsValue(createReportData)
       }
-      form.setFieldsValue(initialFormValue)
     }
   }, [overlay.visible])
 
