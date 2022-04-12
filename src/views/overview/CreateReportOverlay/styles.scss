@@ -17,14 +17,6 @@
   .ant-form {
     width: 100%;
 
-    .vendor-card {
-      margin: 15px 15px 0 15px;
-    }
-
-    .add-vendor-button {
-      margin: 25px 0 25px 0;
-    }
-
     .fix {
       display: flex;
       align-items: center;
@@ -59,7 +51,6 @@
   }
 
   .ant-card {
-    margin-bottom: 20px;
     @include vars.shadow-element;
   }
 
@@ -90,7 +81,20 @@
     }
   }
 
-  .product-entry {
+  .index-container {
+    background-color: rgb(224, 224, 224);
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+
+  .vendor-entry {
+    margin: 10px;
+  }
+
+  .product-entry, .vendor-entry {
     display: flex;
     flex-direction: row;
     border-bottom: 1px solid rgb(224, 224, 224);
@@ -98,16 +102,6 @@
     margin-bottom: 15px;
     overflow: hidden;
     @include vars.shadow-element-corner;
-
-    .index-container {
-      background-color: rgb(224, 224, 224);
-      width: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 10px;
-      font-weight: bold;
-    }
 
     .product-entry-section {
       flex: 1 1;

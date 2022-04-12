@@ -137,68 +137,73 @@ const CreateReportOverlay = (props) => {
           <Form.List name="vendors">
             {(fields, { add, remove }) => (
               <>
-                {fields.map((field) => (
+                {fields.map((field, index) => (
                   <Form.Item key={field.name}>
-                    <Card
-                      className="vendor-card"
-                      title={
-                        <CardHeader
-                          title={<i>Vendor</i>}
-                          icon={faTruck}
-                          remove={() => remove(field.name)}
-                        />
-                      }
-                    >
-                      <div className="d-flex">
-                        <Form.Item
-                          className="me-2"
-                          name={[field.name, "vendor_id"]}
-                          rules={[
-                            {
-                              required: true,
-                              message: "Choosing a vendor is required",
-                            },
-                          ]}
-                        >
-                          <Select
-                            showSearch
-                            placeholder="Select vendor"
-                            optionFilterProp="children"
-                            filterOption={(input, option) =>
-                              option.children
-                                .toLowerCase()
-                                .indexOf(input.toLowerCase()) >= 0
-                            }
-                            style={{ width: 250 }}
-                          >
-                            {VendorsArray.map((product) => (
-                              <Select.Option
-                                key={product.id}
-                                value={product.id}
-                              >
-                                {product.name}
-                              </Select.Option>
-                            ))}
-                          </Select>
-                        </Form.Item>
-                        <Form.Item
-                          className="me-2"
-                          name={[field.name, "invoice_number"]}
-                          rules={[
-                            {
-                              required: true,
-                              message: "Invoice number is required",
-                            },
-                          ]}
-                        >
-                          <Input
-                            placeholder="Invoice number"
-                            style={{ width: 250 }}
-                          />
-                        </Form.Item>
+                    <div className="vendor-entry">
+                      <div className="index-container">
+                        <div className="numbering">{index + 1}.</div>
                       </div>
-                      <VendorForm fieldKey={field.name} />
-                    </Card>
+                      <Card
+                        className="vendor-card"
+                        title={
+                          <CardHeader
+                            title={<i>Vendor</i>}
+                            icon={faTruck}
+                            remove={() => remove(field.name)}
+                          />
+                        }
+                      >
+                        <div className="d-flex">
+                          <Form.Item
+                            className="me-2"
+                            name={[field.name, "vendor_id"]}
+                            rules={[
+                              {
+                                required: true,
+                                message: "Choosing a vendor is required",
+                              },
+                            ]}
+                          >
+                            <Select
+                              showSearch
+                              placeholder="Select vendor"
+                              optionFilterProp="children"
+                              filterOption={(input, option) =>
+                                option.children
+                                  .toLowerCase()
+                                  .indexOf(input.toLowerCase()) >= 0
+                              }
+                              style={{ width: 250 }}
+                            >
+                              {VendorsArray.map((product) => (
+                                <Select.Option
+                                  key={product.id}
+                                  value={product.id}
+                                >
+                                  {product.name}
+                                </Select.Option>
+                              ))}
+                            </Select>
+                          </Form.Item>
+                          <Form.Item
+                            className="me-2"
+                            name={[field.name, "invoice_number"]}
+                            rules={[
+                              {
+                                required: true,
+                                message: "Invoice number is required",
+                              },
+                            ]}
+                          >
+                            <Input
+                              placeholder="Invoice number"
+                              style={{ width: 250 }}
+                            />
+                          </Form.Item>
+                        </div>
+                        <VendorForm fieldKey={field.name} />
+                      </Card>
+                    </div>
                   </Form.Item>
                 ))}
                 <Form.Item>
