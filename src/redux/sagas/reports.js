@@ -18,7 +18,7 @@ export function* SET_REPORT_DATE({ payload }) {
 export function* FETCH_REPORTS({ payload }) {
   const { date } = payload
   const details = {
-    "05.04.2022": {
+    "2022-04-05": {
       vendors: [
         {
           products: [
@@ -52,7 +52,7 @@ export function* FETCH_REPORTS({ payload }) {
         },
       ],
     },
-    "10.04.2022": {
+    "2022-04-10": {
       vendors: [
         {
           products: [

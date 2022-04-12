@@ -9,19 +9,18 @@ import actions from "../../../redux/actions"
 
 const DayEntry = (props) => {
   const { entry, details, overlay } = props
-  const dateString = moment(entry).format("DD.MM.YYYY")
 
   const dispatch = useDispatch()
 
   const selected = false
 
   const handleEditClick = () => {
-    dispatch({ type: actions.SET_REPORT_DATE, payload: { date: dateString } })
+    dispatch({ type: actions.SET_REPORT_DATE, payload: { date: entry } })
     overlay.show()
   }
 
   const handlePlusClick = () => {
-    dispatch({ type: actions.SET_REPORT_DATE, payload: { date: dateString } })
+    dispatch({ type: actions.SET_REPORT_DATE, payload: { date: entry } })
     overlay.show()
   }
 

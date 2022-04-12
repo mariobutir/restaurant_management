@@ -51,7 +51,7 @@ const DailyView = (props) => {
               {!isEmpty(entry) && (
                 <DayEntry
                   entry={entry}
-                  details={reports[moment(entry).format("DD.MM.YYYY")] || {}}
+                  details={reports[entry] || {}}
                   {...props}
                 />
               )}
