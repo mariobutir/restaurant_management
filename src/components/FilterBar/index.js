@@ -11,7 +11,7 @@ const FilterBar = () => {
     <Header className="overview-header">
       <div className="overview-header-button-container">
         <Button ghost className="add-edit-vendor" icon={<PlusOutlined />}>
-          Create vendor
+          Create vendors
         </Button>
         <Button ghost className="add-edit-vendor" icon={<EditOutlined />}>
           Edit vendors
