@@ -67,7 +67,7 @@ const CreateReportOverlay = (props) => {
     return (
       <div className="overlay-footer d-flex w-100 justify-content-between align-center">
         <div className="overlay-title">
-          {isEditMode ? "Edit " : "Add new "} report on:{" "}
+          {isEditMode ? "Update " : "Create new "} report on:{" "}
           <b>{moment(date).format("dddd, MMMM Do YYYY")}</b>
         </div>
         <div className="d-flex">
@@ -79,11 +79,9 @@ const CreateReportOverlay = (props) => {
               Reset
             </Button>
           )}
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Save
-            </Button>
-          </Form.Item>
+          <Button type="primary" onClick={form.submit}>
+            {isEditMode ? "Update" : "Create"}
+          </Button>
         </div>
       </div>
     )

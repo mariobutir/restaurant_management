@@ -1,4 +1,13 @@
 .overview-header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+
+  .add-edit-vendor {
+    margin-left: 10px;
+  }
+}
+
+.overview-header-button-container {
+  width: 25vw;
 }
