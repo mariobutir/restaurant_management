@@ -32,7 +32,7 @@ $component-color-accent: #eeeeee;
 }
 
 @mixin shadow-element {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.12);
 }
 
 @mixin shadow-top {

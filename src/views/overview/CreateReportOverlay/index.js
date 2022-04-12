@@ -34,13 +34,14 @@ const CreateReportOverlay = (props) => {
   const { overlay } = props
 
   const { date, details } = useSelector((store) => store.reports)
-  let initialFormValue = details[date] || {}
+  const initialFormValue = details[date] || {}
+  const isEditMode = Object.keys(initialFormValue).length !== 0
 
   let [form] = Form.useForm()
 
   useEffect(() => {
     if (overlay.visible) {
-      if (Object.keys(initialFormValue).length !== 0) {
+      if (isEditMode) {
         initialFormValue.vendors.forEach((vendor) => {
           vendor.products.forEach((product) => {
             product["total"] = formatter.format(product.quantity * product.rate)
@@ -66,15 +67,18 @@ const CreateReportOverlay = (props) => {
     return (
       <div className="overlay-footer d-flex w-100 justify-content-between align-center">
         <div className="overlay-title">
-          Add new report on: <b>{moment(date).format("dddd, MMMM Do YYYY")}</b>
+          {isEditMode ? "Edit " : "Add new "} report on:{" "}
+          <b>{moment(date).format("dddd, MMMM Do YYYY")}</b>
         </div>
         <div className="d-flex">
           <Button danger className="me-2" onClick={handleDiscard}>
             Discard
           </Button>
-          <Button className="me-2" onClick={handleReset}>
-            Reset
-          </Button>
+          {isEditMode && (
+            <Button className="me-2" onClick={handleReset}>
+              Reset
+            </Button>
+          )}
           <Form.Item>
             <Button type="primary" htmlType="submit">
               Save
