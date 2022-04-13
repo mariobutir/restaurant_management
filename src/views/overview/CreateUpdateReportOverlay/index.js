@@ -142,7 +142,7 @@ const CreateReportOverlay = (props) => {
               <>
                 {fields.map((field, index) => (
                   <Form.Item key={field.name}>
-                    <div className="vendor-entry">
+                    <div className="dynamic-entry-item margin-10">
                       <div className="index-container">
                         <div className="numbering">{index + 1}.</div>
                       </div>

@@ -11,7 +11,7 @@ const VendorForm = (props) => {
         {(fields, { add, remove }) => (
           <>
             {fields.map(({ key, name, ...restField }, index) => (
-              <div key={key} className="product-entry">
+              <div key={key} className="dynamic-entry-item">
                 <div className="index-container">
                   <div className="numbering">{index + 1}.</div>
                 </div>
