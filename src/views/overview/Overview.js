@@ -21,14 +21,14 @@ const Overview = () => {
     filters: { type },
   } = useSelector((store) => store.overview)
 
-  const addNewOverlay = useModal({ defaultVisible: false })
+  const reportOverlay = useModal({ defaultVisible: false })
 
   return (
     <div className="overview">
-      <CreateReportOverlay overlay={addNewOverlay} />
+      <CreateReportOverlay overlay={reportOverlay} />
       <FilterBar />
       <ViewContent className="overview-content" spinning={loading}>
-        <GranulatedView type={type} overlay={addNewOverlay} />
+        <GranulatedView type={type} overlay={reportOverlay} />
       </ViewContent>
     </div>
   )

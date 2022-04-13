@@ -9,6 +9,10 @@ const actions = {
   SET_REPORT_DATE: "reports/SET_REPORT_DATE",
   FETCH_REPORTS: "reports/FETCH_REPORTS",
   FETCH_REPORT_FORM_DATA: "reports/FETCH_REPORT_FORM_DATA",
+
+  // VENDORS
+  SET_VENDOR_STATE: "reports/SET_VENDOR_STATE",
+  FETCH_VENDORS: "reports/FETCH_VENDORS",
 }
 
 export default actions
