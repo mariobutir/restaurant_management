@@ -23,7 +23,7 @@ const CardHeader = (props) => {
     <div className="fix">
       {icon && <FontAwesomeIcon className="me-2" icon={icon} />}
       {title}
-      <div className="product-actions vendor-remove">
+      <div className="dynamic-entry-actions vendor-remove">
         <MinusCircleOutlined onClick={() => remove()} />
       </div>
     </div>
@@ -126,7 +126,7 @@ const CreateReportOverlay = (props) => {
   }
 
   return (
-    <Overlay className="add-report-overlay" overlay={overlay} header={false}>
+    <Overlay className="overlay-root" overlay={overlay} header={false}>
       <Form
         form={form}
         layout="horizontal"
@@ -136,7 +136,7 @@ const CreateReportOverlay = (props) => {
         initialValues={{}}
         {...layout}
       >
-        <Form.Item className="product-entry-wrapper">
+        <Form.Item className="dynamic-entry-wrapper">
           <Form.List name="vendors">
             {(fields, { add, remove }) => (
               <>
@@ -211,7 +211,6 @@ const CreateReportOverlay = (props) => {
                 ))}
                 <Form.Item>
                   <Button
-                    className="add-vendor-button"
                     type="dashed"
                     onClick={() => add()}
                     block

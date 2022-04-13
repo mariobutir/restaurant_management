@@ -1,6 +1,6 @@
 @use '../../../constants' as vars;
 
-.add-report-overlay {
+.overlay-root {
   background-color: vars.$background-color;
   padding-bottom: 50px;
 
@@ -74,7 +74,7 @@
     @include vars.shadow-top;
   }
 
-  .product-entry-wrapper {
+  .dynamic-entry-wrapper {
     .ant-col {
       max-width: 100%;
       width: 100%;
@@ -103,7 +103,7 @@
     overflow: hidden;
     @include vars.shadow-element-corner;
 
-    .product-entry-section {
+    .dynamic-entry-section {
       flex: 1 1;
       margin: 15px 10px 0;
 
@@ -112,7 +112,7 @@
       }
     }
 
-    .product-actions {
+    .dynamic-entry-actions {
       display: flex;
       align-items: center;
       color: red;

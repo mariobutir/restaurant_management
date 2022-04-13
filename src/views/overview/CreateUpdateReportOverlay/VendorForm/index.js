@@ -6,7 +6,7 @@ const VendorForm = (props) => {
   const { fieldKey } = props
 
   return (
-    <Form.Item className="product-entry-wrapper">
+    <Form.Item className="dynamic-entry-wrapper">
       <Form.List name={[fieldKey, "products"]}>
         {(fields, { add, remove }) => (
           <>
@@ -15,7 +15,7 @@ const VendorForm = (props) => {
                 <div className="index-container">
                   <div className="numbering">{index + 1}.</div>
                 </div>
-                <div className="product-entry-section">
+                <div className="dynamic-entry-section">
                   <div className="d-flex justify-content-between">
                     <div className="d-flex">
                       <Form.Item
@@ -105,7 +105,7 @@ const VendorForm = (props) => {
                     </div>
                   </div>
                 </div>
-                <div className="product-actions">
+                <div className="dynamic-entry-actions">
                   <MinusCircleOutlined onClick={() => remove(name)} />
                 </div>
               </div>
