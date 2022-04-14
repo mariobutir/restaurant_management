@@ -3,7 +3,6 @@
 .main__layout {
   .main__content {
     position: relative;
-    margin-top: vars.$header-height;
     margin-left: vars.$sider-width;
     min-height: calc(100vh - #{vars.$header-height}); // Header + Footer
   }
