@@ -1,5 +1,5 @@
-import React from 'react'
-import { useNavigate } from 'react-router'
+import React from "react"
+import { useNavigate } from "react-router"
 import { CalendarOutlined, ShopOutlined } from "@ant-design/icons"
 
 const menu = () => {
@@ -8,17 +8,17 @@ const menu = () => {
 
   const menuItems = [
     {
-      key: 'overview',
-      element: 'Overview',
+      key: "overview",
+      element: "Overview",
       icon: <CalendarOutlined />,
-      onClick: () => navigate('/overview'),
+      onClick: () => navigate("/overview"),
     },
     {
-      key: 'vendors',
-      element: 'Vendors',
+      key: "items",
+      element: "Item Master",
       icon: <ShopOutlined />,
-      onClick: () => navigate('/vendors'),
-    }
+      onClick: () => navigate("/items"),
+    },
   ]
 
   return { menuItems }

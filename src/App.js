@@ -3,12 +3,17 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import Overview from "./views/overview/Overview"
 import "./App.scss"
 import IndexLayout from "./layouts"
+import ItemMaster from "./views/itemMaster"
 
 const routes = [
   {
     path: "/overview",
-    element: <Overview />
-  }
+    element: <Overview />,
+  },
+  {
+    path: "/items",
+    element: <ItemMaster />,
+  },
 ]
 
 const Router = () => {
