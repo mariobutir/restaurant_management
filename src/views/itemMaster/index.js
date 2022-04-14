@@ -1,7 +1,8 @@
 import { useState } from "react"
 import { Card } from "antd"
 import "./styles.scss"
-import Vendors from "./vendors"
+import VendorsTable from "./vendors"
+import ProductsTable from "./products"
 
 const tabList = [
   {
@@ -15,8 +16,8 @@ const tabList = [
 ]
 
 const contentList = {
-  vendors: <Vendors />,
-  products: <p>product test</p>,
+  vendors: <VendorsTable />,
+  products: <ProductsTable />,
 }
 
 const ItemMaster = () => {

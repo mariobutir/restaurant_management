@@ -1,7 +1,7 @@
 import { Table, Space, Button, Modal } from "antd"
 import React, { useState } from "react"
 
-const VendorsTable = () => {
+const ProductsTable = () => {
   const [isModalVisible, setIsModalVisible] = useState(false)
 
   const showModal = () => {
@@ -21,19 +21,19 @@ const VendorsTable = () => {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (text) => text,
       width: "45%",
+      render: (text) => text,
     },
     {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
+      title: "Rate",
+      dataIndex: "rate",
+      key: "rate",
       width: "20%",
     },
     {
-      title: "Contact",
-      dataIndex: "contact",
-      key: "contact",
+      title: "Tax",
+      dataIndex: "tax",
+      key: "tax",
       width: "20%",
     },
     {
@@ -57,21 +57,21 @@ const VendorsTable = () => {
   const data = [
     {
       key: "1",
-      name: "Vendor 1",
-      address: "New York No. 1 Lake Park",
-      contact: "+123 456 789",
+      name: "Product 1",
+      rate: 10,
+      tax: 5,
     },
     {
       key: "2",
-      name: "Vendor 2",
-      address: "London No. 1 Lake Park",
-      contact: "+123 456 789",
+      name: "Product 2",
+      rate: 5,
+      tax: 3,
     },
     {
       key: "3",
-      name: "Vendor 3",
-      address: "Sidney No. 1 Lake Park",
-      contact: "+123 456 789",
+      name: "Product 3",
+      rate: 8,
+      tax: 12,
     },
   ]
 
@@ -83,11 +83,11 @@ const VendorsTable = () => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <p>Are you sure you want to delete vendor?</p>
+        <p>Are you sure you want to delete product?</p>
       </Modal>
       <Table columns={columns} dataSource={data} />
     </>
   )
 }
 
-export default VendorsTable
+export default ProductsTable
