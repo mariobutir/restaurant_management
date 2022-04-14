@@ -1,4 +1,10 @@
 const actions = {
+  // SESSION
+  LOGIN: 'session/LOGIN',
+  LOGOUT: 'session/LOGOUT',
+  FETCH_SESSION: 'session/FETCH_SESSION',
+  SET_SESSION_STATE: 'session/SET_SESSION_STATE',
+
   // OVERVIEW
   SET_OVERVIEW_STATE: "overview/SET_OVERVIEW_STATE",
   FETCH_OVERVIEW: "overview/FETCH_OVERVIEW",
@@ -13,6 +19,10 @@ const actions = {
   // VENDORS
   SET_VENDOR_STATE: "reports/SET_VENDOR_STATE",
   FETCH_VENDORS: "reports/FETCH_VENDORS",
+
+  // NAVIGATOR
+  SET_NAVIGATOR_STATE: 'navigator/SET_NAVIGATOR_STATE',
+  NAVIGATE: 'navigator/NAVIGATE',
 }
 
 export default actions

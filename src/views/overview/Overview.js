@@ -1,6 +1,6 @@
 import FilterBar from "../../components/FilterBar"
 import { useSelector } from "react-redux"
-import ViewContent from "../../layouts/ViewContent"
+import ViewContent from "../../layouts/Main/ViewContent"
 import enums from "../../enums"
 import DailyView from "../../components/DailyView"
 
