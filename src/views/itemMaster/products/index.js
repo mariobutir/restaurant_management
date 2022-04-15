@@ -1,8 +1,17 @@
 import { Table, Space, Button, Modal } from "antd"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import actions from "../../../redux/actions"
 
 const ProductsTable = () => {
   const [isModalVisible, setIsModalVisible] = useState(false)
+  const { data, loading } = useSelector(state => state.products)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch({ type: actions.FETCH_PRODUCTS })
+  }, [])
 
   const showModal = () => {
     setIsModalVisible(true)
@@ -54,27 +63,6 @@ const ProductsTable = () => {
     },
   ]
 
-  const data = [
-    {
-      key: "1",
-      name: "Product 1",
-      rate: 10,
-      tax: 5,
-    },
-    {
-      key: "2",
-      name: "Product 2",
-      rate: 5,
-      tax: 3,
-    },
-    {
-      key: "3",
-      name: "Product 3",
-      rate: 8,
-      tax: 12,
-    },
-  ]
-
   return (
     <>
       <Modal
@@ -85,7 +73,7 @@ const ProductsTable = () => {
       >
         <p>Are you sure you want to delete product?</p>
       </Modal>
-      <Table columns={columns} dataSource={data} />
+      <Table loading={loading} columns={columns} dataSource={data} />
     </>
   )
 }

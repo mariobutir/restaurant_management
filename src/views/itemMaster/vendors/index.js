@@ -1,8 +1,17 @@
 import { Table, Space, Button, Modal } from "antd"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import actions from "../../../redux/actions"
 
 const VendorsTable = () => {
   const [isModalVisible, setIsModalVisible] = useState(false)
+  const { data, loading } = useSelector(state => state.vendors)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch({ type: actions.FETCH_VENDORS })
+  }, [])
 
   const showModal = () => {
     setIsModalVisible(true)
@@ -54,27 +63,6 @@ const VendorsTable = () => {
     },
   ]
 
-  const data = [
-    {
-      key: "1",
-      name: "Vendor 1",
-      address: "New York No. 1 Lake Park",
-      contact: "+123 456 789",
-    },
-    {
-      key: "2",
-      name: "Vendor 2",
-      address: "London No. 1 Lake Park",
-      contact: "+123 456 789",
-    },
-    {
-      key: "3",
-      name: "Vendor 3",
-      address: "Sidney No. 1 Lake Park",
-      contact: "+123 456 789",
-    },
-  ]
-
   return (
     <>
       <Modal
@@ -85,7 +73,7 @@ const VendorsTable = () => {
       >
         <p>Are you sure you want to delete vendor?</p>
       </Modal>
-      <Table columns={columns} dataSource={data} />
+      <Table loading={loading} columns={columns} dataSource={data} />
     </>
   )
 }
