@@ -1,10 +1,11 @@
-import { Table, Space, Button, Modal } from "antd"
+import { Button, Modal, Space, Table } from "antd"
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "../../../redux/actions"
 
 const ProductsTable = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
+  const [isFormModalVisible, setIsFormModalVisible] = useState(false)
   const { data, loading } = useSelector(state => state.products)
 
   const dispatch = useDispatch()
@@ -13,16 +14,29 @@ const ProductsTable = () => {
     dispatch({ type: actions.FETCH_PRODUCTS })
   }, [])
 
-  const showModal = () => {
-    setIsModalVisible(true)
+  const showDeleteModal = (text) => {
+    console.log("text", text)
+    setIsDeleteModalVisible(true)
   }
 
-  const handleOk = () => {
-    setIsModalVisible(false)
+  const handleOkDelete = () => {
+    setIsDeleteModalVisible(false)
   }
 
-  const handleCancel = () => {
-    setIsModalVisible(false)
+  const handleCancelDelete = () => {
+    setIsDeleteModalVisible(false)
+  }
+
+  const showEditModal = () => {
+    setIsFormModalVisible(true)
+  }
+
+  const handleOkEdit = () => {
+    setIsFormModalVisible(false)
+  }
+
+  const handleCancelEdit = () => {
+    setIsFormModalVisible(false)
   }
 
   const columns = [
@@ -31,19 +45,19 @@ const ProductsTable = () => {
       dataIndex: "name",
       key: "name",
       width: "45%",
-      render: (text) => text,
+      render: (text) => text
     },
     {
       title: "Rate",
       dataIndex: "rate",
       key: "rate",
-      width: "20%",
+      width: "20%"
     },
     {
       title: "Tax",
       dataIndex: "tax",
       key: "tax",
-      width: "20%",
+      width: "20%"
     },
     {
       title: "Action",
@@ -51,25 +65,48 @@ const ProductsTable = () => {
       render: (text, record) => (
         <Space size="middle">
           <div className="d-flex">
-            <Button danger className="me-2" onClick={showModal}>
+            <Button danger className="me-2" onClick={() => showDeleteModal(text)}>
               Delete
             </Button>
-            <Button className="me-2" type="primary">
+            <Button className="me-2" type="primary" onClick={showEditModal}>
               Edit
             </Button>
           </div>
         </Space>
-      ),
-    },
+      )
+    }
   ]
 
   return (
     <>
       <Modal
-        title="Basic Modal"
-        visible={isModalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
+        visible={isDeleteModalVisible}
+        onOk={handleOkDelete}
+        onCancel={handleCancelDelete}
+        footer={[
+          <Button key="back" onClick={handleCancelDelete}>
+            Cancel
+          </Button>,
+          <Button danger key="submit" onClick={handleOkDelete}>
+            Delete
+          </Button>
+        ]}
+      >
+        <p>Are you sure you want to delete product?</p>
+      </Modal>
+      <Modal
+        title="Edit product"
+        visible={isFormModalVisible}
+        onOk={handleOkEdit}
+        onCancel={handleCancelEdit}
+        footer={[
+          <Button key="back" onClick={handleCancelEdit}>
+            Cancel
+          </Button>,
+          <Button key="submit" type="primary" onClick={handleOkEdit}>
+            Submit
+          </Button>
+        ]}
       >
         <p>Are you sure you want to delete product?</p>
       </Modal>
