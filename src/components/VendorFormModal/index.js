@@ -89,7 +89,7 @@ const VendorFormModal = (props) => {
           </Form.Item>
           <Form.Item
             label="GST number"
-            name={["gst_number"]}
+            name={["gst"]}
             rules={[
               {
                 required: true,

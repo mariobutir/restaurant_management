@@ -41,8 +41,8 @@ const VendorsTable = () => {
     },
     {
       title: "GST number",
-      dataIndex: "gst_number",
-      key: "gst_number",
+      dataIndex: "gst",
+      key: "gst",
       render: (text) => text,
     },
     {
