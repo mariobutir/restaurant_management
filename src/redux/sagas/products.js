@@ -11,20 +11,26 @@ export function* FETCH_PRODUCTS() {
     {
       id: "1",
       name: "Product 1",
-      rate: 10,
-      tax: 5,
+      brand: "Brand 1",
+      category: "Chicken",
+      unit: "Kg",
+      life: 5,
     },
     {
       id: "2",
       name: "Product 2",
-      rate: 5,
-      tax: 3,
+      brand: "Brand 2",
+      category: "Spices",
+      unit: "Kg",
+      life: 5,
     },
     {
       id: "3",
       name: "Product 3",
-      rate: 8,
-      tax: 12,
+      brand: "Brand 2",
+      category: "Dairy",
+      unit: "Kg",
+      life: 5,
     },
   ]
 
@@ -35,7 +41,5 @@ export function* FETCH_PRODUCTS() {
 }
 
 export default function* rootSaga() {
-  yield all([
-    takeEvery(actions.FETCH_PRODUCTS, FETCH_PRODUCTS)
-  ])
+  yield all([takeEvery(actions.FETCH_PRODUCTS, FETCH_PRODUCTS)])
 }
