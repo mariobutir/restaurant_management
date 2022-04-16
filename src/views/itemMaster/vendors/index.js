@@ -83,9 +83,7 @@ const VendorsTable = () => {
             <Button danger className="me-2" onClick={showDeleteModal}>
               Delete
             </Button>
-            <Button className="me-2" type="primary">
-              Edit
-            </Button>
+            <VendorFormModal vendor_id={text.key} />
           </div>
         </Space>
       ),
@@ -110,7 +108,14 @@ const VendorsTable = () => {
         <p>Are you sure you want to delete vendor?</p>
       </Modal>
       <VendorFormModal />
-      <Table loading={loading} columns={columns} dataSource={data} />
+      <Table
+        loading={loading}
+        columns={columns}
+        dataSource={Object.values(data).map(({ id, ...rest }) => ({
+          key: id,
+          ...rest,
+        }))}
+      />
     </>
   )
 }

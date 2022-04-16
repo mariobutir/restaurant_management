@@ -1,48 +1,67 @@
-import { Modal, Button, Form, Input } from "antd"
-import { useState } from "react"
+import { Modal, Button, Form, Input, InputNumber, Space } from "antd"
+import { useEffect, useState } from "react"
+import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons"
+import { useSelector } from "react-redux"
 
-const VendorFormModal = () => {
+const VendorFormModal = (props) => {
+  const { vendor_id } = props
+  const vendors = useSelector((state) => state.vendors.data)
   const [visible, setVisible] = useState(false)
-  const [confirmLoading, setConfirmLoading] = useState(false)
+  const [initialFormState, setInitialFormState] = useState({ contacts: [{}] })
 
-  let [form] = Form.useForm()
+  const [form] = Form.useForm()
+
+  useEffect(() => {
+    if (vendor_id) {
+      setInitialFormState(vendors[vendor_id])
+    }
+  }, [])
 
   const showModal = () => {
     setVisible(true)
   }
 
   const handleOk = () => {
-    setConfirmLoading(true)
     form.submit()
-    setTimeout(() => {
+    if (form.getFieldsError().length === 0) {
       setVisible(false)
-      setConfirmLoading(false)
-    }, 2000)
+      form.resetFields()
+    }
+  }
+
+  const handleFinish = () => {
+    console.log("finish")
+  }
+
+  const handleFinishFailed = () => {
+    console.log("finish failed")
   }
 
   const handleCancel = () => {
-    console.log("Clicked cancel button")
     setVisible(false)
   }
 
   return (
     <>
       <Button className="mb-4" type="primary" onClick={showModal}>
-        Add vendor
+        {vendor_id ? "Edit" : "Create new vendor"}
       </Button>
       <Modal
-        title="Create new vendor"
+        title={vendor_id ? "Edit vendor" : "Create new vendor"}
         visible={visible}
         onOk={handleOk}
-        confirmLoading={confirmLoading}
         onCancel={handleCancel}
-        width={700}
+        width={1000}
       >
         <Form
+          form={form}
           labelCol={{
             span: 3,
           }}
           layout="horizontal"
+          initialValues={initialFormState}
+          onFinish={handleFinish}
+          onFinishFailed={handleFinishFailed}
         >
           <Form.Item
             label="Name"
@@ -68,6 +87,97 @@ const VendorFormModal = () => {
           >
             <Input />
           </Form.Item>
+          <Form.Item
+            label="GST number"
+            name={["gst_number"]}
+            rules={[
+              {
+                required: true,
+                message: "GST number is required",
+              },
+            ]}
+          >
+            <InputNumber />
+          </Form.Item>
+          <Form.Item
+            label="Lead time"
+            name={["lead_time"]}
+            rules={[
+              {
+                required: true,
+                message: "Lead time is required",
+              },
+            ]}
+          >
+            <InputNumber />
+          </Form.Item>
+          <Form.Item
+            label="Terms"
+            name={["payment_terms"]}
+            rules={[
+              {
+                required: true,
+                message: "Payment terms are required",
+              },
+            ]}
+          >
+            <Input.TextArea />
+          </Form.Item>
+          <p>Contacts: </p>
+          <Form.List name="contacts">
+            {(fields, { add, remove }) => (
+              <>
+                {fields.map((field) => (
+                  <Space key={field.key} align="baseline">
+                    <Form.Item
+                      name={[field.name, "name"]}
+                      rules={[
+                        {
+                          required: true,
+                          message: "Contact name is required",
+                        },
+                      ]}
+                    >
+                      <Input placeholder="Contact name" />
+                    </Form.Item>
+                    <Form.Item
+                      name={[field.name, "number"]}
+                      rules={[
+                        {
+                          required: true,
+                          message: "Contact number is required",
+                        },
+                      ]}
+                    >
+                      <Input placeholder="Contact number" />
+                    </Form.Item>
+                    <Form.Item
+                      name={[field.name, "email"]}
+                      rules={[
+                        {
+                          required: true,
+                          message: "Contact email is required",
+                        },
+                      ]}
+                    >
+                      <Input placeholder="Contact email" />
+                    </Form.Item>
+                    <MinusCircleOutlined onClick={() => remove(field.name)} />
+                  </Space>
+                ))}
+                <Form.Item>
+                  <Button
+                    type="dashed"
+                    onClick={() => add()}
+                    block
+                    icon={<PlusOutlined />}
+                  >
+                    Add contact
+                  </Button>
+                </Form.Item>
+              </>
+            )}
+          </Form.List>
         </Form>
       </Modal>
     </>

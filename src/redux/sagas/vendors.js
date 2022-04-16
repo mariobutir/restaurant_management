@@ -7,9 +7,9 @@ export function* FETCH_VENDORS() {
   yield put({ type: SET_STATE, payload: { loading: true } })
   yield delay(500)
 
-  let data = [
-    {
-      id: "1",
+  let response = {
+    1: {
+      id: 1,
       name: "Vendor 1",
       address: "New York No. 1 Lake Park",
       gst_number: 10,
@@ -23,8 +23,8 @@ export function* FETCH_VENDORS() {
         },
       ],
     },
-    {
-      id: "2",
+    2: {
+      id: 2,
       name: "Vendor 2",
       address: "London No. 1 Lake Park",
       gst_number: 10,
@@ -43,36 +43,9 @@ export function* FETCH_VENDORS() {
         },
       ],
     },
-    {
-      id: "3",
-      name: "Vendor 3",
-      address: "Sidney No. 1 Lake Park",
-      gst_number: 10,
-      payment_terms: "test",
-      lead_time: 10,
-      contacts: [
-        {
-          name: "Mario",
-          number: "+123 456 789",
-          email: "test@test.com",
-        },
-        {
-          name: "Ante",
-          number: "+123 456 789",
-          email: "test@test.com",
-        },
-        {
-          name: "Ivan",
-          number: "+123 456 789",
-          email: "test@test.com",
-        },
-      ],
-    },
-  ]
+  }
 
-  data = data.map(({ id, ...rest }) => ({ key: id, ...rest }))
-
-  yield put({ type: SET_STATE, payload: { data: data } })
+  yield put({ type: SET_STATE, payload: { data: response } })
   yield put({ type: SET_STATE, payload: { loading: false } })
 }
 

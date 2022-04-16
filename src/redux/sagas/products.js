@@ -7,8 +7,8 @@ export function* FETCH_PRODUCTS() {
   yield put({ type: SET_STATE, payload: { loading: true } })
   yield delay(500)
 
-  let data = [
-    {
+  let data = {
+    1: {
       id: "1",
       name: "Product 1",
       brand: "Brand 1",
@@ -16,7 +16,7 @@ export function* FETCH_PRODUCTS() {
       unit: "Kg",
       life: 5,
     },
-    {
+    2: {
       id: "2",
       name: "Product 2",
       brand: "Brand 2",
@@ -24,7 +24,7 @@ export function* FETCH_PRODUCTS() {
       unit: "Kg",
       life: 5,
     },
-    {
+    3: {
       id: "3",
       name: "Product 3",
       brand: "Brand 2",
@@ -32,9 +32,9 @@ export function* FETCH_PRODUCTS() {
       unit: "Kg",
       life: 5,
     },
-  ]
+  }
 
-  data = data.map(({ id, ...rest }) => ({ key: id, ...rest }))
+  data = Object.values(data).map(({ id, ...rest }) => ({ key: id, ...rest }))
 
   yield put({ type: SET_STATE, payload: { data: data } })
   yield put({ type: SET_STATE, payload: { loading: false } })
