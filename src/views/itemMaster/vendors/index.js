@@ -2,10 +2,11 @@ import { Button, Modal, Space, Table } from "antd"
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "../../../redux/actions"
+import VendorFormModal from "../../../components/VendorFormModal"
 
 const VendorsTable = () => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
-  const { data, loading } = useSelector(state => state.vendors)
+  const { data, loading } = useSelector((state) => state.vendors)
 
   const dispatch = useDispatch()
 
@@ -31,23 +32,51 @@ const VendorsTable = () => {
       dataIndex: "name",
       key: "name",
       render: (text) => text,
-      width: "45%"
     },
     {
       title: "Address",
       dataIndex: "address",
       key: "address",
-      width: "20%"
+      render: (text) => text,
     },
     {
-      title: "Contact",
-      dataIndex: "contact",
-      key: "contact",
-      width: "20%"
+      title: "GST number",
+      dataIndex: "gst_number",
+      key: "gst_number",
+      render: (text) => text,
+    },
+    {
+      title: "Lead time",
+      dataIndex: "lead_time",
+      key: "lead_time",
+      render: (text) => text,
+    },
+    {
+      title: "Payment terms",
+      dataIndex: "payment_terms",
+      key: "payment_terms",
+      render: (text) => text,
+    },
+    {
+      title: "Contacts",
+      dataIndex: "contacts",
+      key: "contacts",
+      render: (text, record) => (
+        <div className="d-flex flex-column">
+          {text.map((contact, index) => {
+            return (
+              <p key={index} className="m-0">
+                {contact.name} | {contact.number} | {contact.email}
+              </p>
+            )
+          })}
+        </div>
+      ),
     },
     {
       title: "Action",
       key: "action",
+      width: "10%",
       render: (text, record) => (
         <Space size="middle">
           <div className="d-flex">
@@ -59,8 +88,8 @@ const VendorsTable = () => {
             </Button>
           </div>
         </Space>
-      )
-    }
+      ),
+    },
   ]
 
   return (
@@ -75,11 +104,12 @@ const VendorsTable = () => {
           </Button>,
           <Button danger key="submit" onClick={handleOkDelete}>
             Delete
-          </Button>
+          </Button>,
         ]}
       >
         <p>Are you sure you want to delete vendor?</p>
       </Modal>
+      <VendorFormModal />
       <Table loading={loading} columns={columns} dataSource={data} />
     </>
   )

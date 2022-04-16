@@ -2,6 +2,7 @@ import { Button, Modal, Space, Table } from "antd"
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "../../../redux/actions"
+import ProductFormModal from "../../../components/ProductFormModal"
 
 const ProductsTable = () => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
@@ -131,6 +132,7 @@ const ProductsTable = () => {
       >
         <p>Editing product</p>
       </Modal>
+      <ProductFormModal />
       <Table loading={loading} columns={columns} dataSource={data} />
     </>
   )
