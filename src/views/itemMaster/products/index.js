@@ -67,7 +67,7 @@ const ProductsTable = () => {
       render: (text) => text,
     },
     {
-      title: "Shelf Life (in days)",
+      title: "Shelf Life (days)",
       dataIndex: "life",
       key: "life",
       render: (text) => text,

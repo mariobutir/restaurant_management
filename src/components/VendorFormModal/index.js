@@ -1,13 +1,16 @@
 import { Modal, Button, Form, Input, InputNumber, Space } from "antd"
 import { useEffect, useState } from "react"
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import actions from "../../redux/actions"
 
 const VendorFormModal = (props) => {
   const { vendor_id } = props
   const vendors = useSelector((state) => state.vendors.data)
   const [visible, setVisible] = useState(false)
   const [initialFormState, setInitialFormState] = useState({ contacts: [{}] })
+
+  const dispatch = useDispatch()
 
   const [form] = Form.useForm()
 
@@ -23,14 +26,13 @@ const VendorFormModal = (props) => {
 
   const handleOk = () => {
     form.submit()
-    if (form.getFieldsError().length === 0) {
-      setVisible(false)
-      form.resetFields()
-    }
   }
 
-  const handleFinish = () => {
-    console.log("finish")
+  const handleFinish = (data) => {
+    dispatch({ type: actions.CREATE_VENDOR, payload: data })
+    setVisible(false)
+    form.resetFields()
+    dispatch({ type: actions.FETCH_VENDORS })
   }
 
   const handleFinishFailed = () => {

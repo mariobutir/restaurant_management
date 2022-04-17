@@ -46,7 +46,7 @@ const VendorsTable = () => {
       render: (text) => text,
     },
     {
-      title: "Lead time",
+      title: "Lead time (days)",
       dataIndex: "lead_time",
       key: "lead_time",
       render: (text) => text,

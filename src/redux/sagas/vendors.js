@@ -10,6 +10,13 @@ export function* FETCH_VENDORS() {
   yield put({ type: SET_STATE, payload: { data: response, loading: false } })
 }
 
+export function* CREATE_VENDOR({ payload }) {
+  yield call(VendorService.createVendor, payload)
+}
+
 export default function* rootSaga() {
-  yield all([takeEvery(actions.FETCH_VENDORS, FETCH_VENDORS)])
+  yield all([
+    takeEvery(actions.FETCH_VENDORS, FETCH_VENDORS),
+    takeEvery(actions.CREATE_VENDOR, CREATE_VENDOR),
+  ])
 }
