@@ -7,6 +7,7 @@ import VendorFormModal from "../../../components/VendorFormModal"
 const VendorsTable = () => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
   const { data, loading } = useSelector((state) => state.vendors)
+  const [vendorToDelete, setVendorToDelete] = useState(undefined)
 
   const dispatch = useDispatch()
 
@@ -14,15 +15,25 @@ const VendorsTable = () => {
     dispatch({ type: actions.FETCH_VENDORS })
   }, [])
 
-  const showDeleteModal = () => {
+  useEffect(() => {
+    if (!isDeleteModalVisible) {
+      dispatch({ type: actions.FETCH_VENDORS })
+    }
+  }, [isDeleteModalVisible])
+
+  const showDeleteModal = (vendor_id) => {
+    setVendorToDelete(vendor_id)
     setIsDeleteModalVisible(true)
   }
 
   const handleOkDelete = () => {
+    dispatch({ type: actions.DELETE_VENDOR, payload: { id: vendorToDelete } })
     setIsDeleteModalVisible(false)
+    setVendorToDelete(undefined)
   }
 
   const handleCancelDelete = () => {
+    setVendorToDelete(undefined)
     setIsDeleteModalVisible(false)
   }
 
@@ -80,7 +91,11 @@ const VendorsTable = () => {
       render: (text, record) => (
         <Space size="middle">
           <div className="d-flex">
-            <Button danger className="me-2" onClick={showDeleteModal}>
+            <Button
+              danger
+              className="me-2"
+              onClick={() => showDeleteModal(text.key)}
+            >
               Delete
             </Button>
             <VendorFormModal vendor_id={text.key} />

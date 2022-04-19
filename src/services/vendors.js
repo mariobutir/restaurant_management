@@ -18,5 +18,15 @@ const updateVendor = async (id, data) => {
   await ApiAdapter.put(`${NAMESPACES.VENDORS}/${id}/`, data)
 }
 
+const deleteVendor = async (id) => {
+  await ApiAdapter.delete(`${NAMESPACES.VENDORS}/${id}/`)
+}
+
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { getVendors, retrieveVendor, createVendor, updateVendor }
+export default {
+  getVendors,
+  retrieveVendor,
+  createVendor,
+  updateVendor,
+  deleteVendor,
+}

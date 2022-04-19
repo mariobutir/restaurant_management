@@ -19,10 +19,16 @@ export function* UPDATE_VENDOR({ payload }) {
   yield call(VendorService.updateVendor, id, data)
 }
 
+export function* DELETE_VENDOR({ payload }) {
+  const { id } = payload
+  yield call(VendorService.deleteVendor, id)
+}
+
 export default function* rootSaga() {
   yield all([
     takeEvery(actions.FETCH_VENDORS, FETCH_VENDORS),
     takeEvery(actions.CREATE_VENDOR, CREATE_VENDOR),
     takeEvery(actions.UPDATE_VENDOR, UPDATE_VENDOR),
+    takeEvery(actions.DELETE_VENDOR, DELETE_VENDOR),
   ])
 }

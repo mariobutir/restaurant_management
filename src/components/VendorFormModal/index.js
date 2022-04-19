@@ -39,9 +39,9 @@ const VendorFormModal = (props) => {
     } else {
       dispatch({ type: actions.CREATE_VENDOR, payload: data })
     }
-    setVisible(false)
     form.resetFields()
     dispatch({ type: actions.FETCH_VENDORS })
+    setVisible(false)
   }
 
   const handleFinishFailed = () => {
