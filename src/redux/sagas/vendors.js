@@ -14,9 +14,15 @@ export function* CREATE_VENDOR({ payload }) {
   yield call(VendorService.createVendor, payload)
 }
 
+export function* UPDATE_VENDOR({ payload }) {
+  const { id, data } = payload
+  yield call(VendorService.updateVendor, id, data)
+}
+
 export default function* rootSaga() {
   yield all([
     takeEvery(actions.FETCH_VENDORS, FETCH_VENDORS),
     takeEvery(actions.CREATE_VENDOR, CREATE_VENDOR),
+    takeEvery(actions.UPDATE_VENDOR, UPDATE_VENDOR),
   ])
 }

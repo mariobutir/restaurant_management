@@ -1,4 +1,4 @@
-import { Modal, Button, Form, Input, InputNumber, Space } from "antd"
+import { Button, Form, Input, InputNumber, Modal, Space } from "antd"
 import { useEffect, useState } from "react"
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons"
 import { useDispatch, useSelector } from "react-redux"
@@ -15,12 +15,14 @@ const VendorFormModal = (props) => {
   const [form] = Form.useForm()
 
   useEffect(() => {
-    if (vendor_id) {
+    if (visible && vendor_id) {
       setInitialFormState(vendors[vendor_id])
+      form.resetFields()
     }
-  }, [])
+  }, [visible])
 
   const showModal = () => {
+    setInitialFormState(vendors[vendor_id])
     setVisible(true)
   }
 
@@ -29,7 +31,14 @@ const VendorFormModal = (props) => {
   }
 
   const handleFinish = (data) => {
-    dispatch({ type: actions.CREATE_VENDOR, payload: data })
+    if (vendor_id) {
+      dispatch({
+        type: actions.UPDATE_VENDOR,
+        payload: { id: vendor_id, data: data },
+      })
+    } else {
+      dispatch({ type: actions.CREATE_VENDOR, payload: data })
+    }
     setVisible(false)
     form.resetFields()
     dispatch({ type: actions.FETCH_VENDORS })
@@ -46,7 +55,7 @@ const VendorFormModal = (props) => {
   return (
     <>
       <Button className="mb-4" type="primary" onClick={showModal}>
-        {vendor_id ? "Edit" : "Create new vendor"}
+        {vendor_id ? "Edit" : "Add vendor"}
       </Button>
       <Modal
         title={vendor_id ? "Edit vendor" : "Create new vendor"}
